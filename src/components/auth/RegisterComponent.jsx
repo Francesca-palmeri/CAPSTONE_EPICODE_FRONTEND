@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Container, Row, Col } from "react-bootstrap"
 
 const RegisterComponent = () => {
   const navigate = useNavigate()
@@ -43,70 +44,76 @@ const RegisterComponent = () => {
   }
 
   return (
-    <form
-      onSubmit={handleRegister}
-      className="d-flex flex-column align-items-center mt-4"
-    >
-      <h2>Registrati</h2>
-      {error && <p className="text-danger">{error}</p>}
-      {success && <p className="text-success">{success}</p>}
-      <div className="d-flex flex-column align-items-center">
-        <input
-          type="text"
-          name="firstName"
-          placeholder="Nome"
-          value={form.firstName}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <input
-          name="lastName"
-          placeholder="Cognome"
-          value={form.lastName}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <input
-          name="birthDate"
-          type="date"
-          value={form.birthDate}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <input
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="form-control my-1"
-          required
-        />
-        <button type="submit" className="btn btn-primary my-2">
-          Registrati
-        </button>
-      </div>
-    </form>
+    <Container fluid>
+      <Row>
+        <Col className="col-12">
+          <form
+            onSubmit={handleRegister}
+            className="d-flex flex-column align-items-center mt-4"
+          >
+            <h2>Registrati</h2>
+            {error && <p className="text-danger">{error}</p>}
+            {success && <p className="text-success">{success}</p>}
+            <div className="d-flex flex-column align-items-center">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="Nome"
+                value={form.firstName}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <input
+                name="lastName"
+                placeholder="Cognome"
+                value={form.lastName}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <input
+                name="birthDate"
+                type="date"
+                value={form.birthDate}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <input
+                name="username"
+                placeholder="Username"
+                value={form.username}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                className="form-control my-1"
+                required
+              />
+              <button type="submit" className="btn btn-primary my-2">
+                Registrati
+              </button>
+            </div>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

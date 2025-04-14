@@ -14,7 +14,7 @@ function NavBarComponent() {
 
   const handleLogout = () => {
     dispatch(logout())
-    navigate("/") // Reindirizza alla home dopo il logout
+    navigate("/")
   }
 
   return (
@@ -33,18 +33,18 @@ function NavBarComponent() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto d-lg-flex justify-content-between align-items-center">
             <div className="d-lg-flex justify-content-between align-items-center me-auto">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/" className="HoverNavLink">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/viaggi">
+              <Nav.Link as={Link} to="/viaggi" className="HoverNavLink">
                 Viaggi
               </Nav.Link>
             </div>
             <div className="d-lg-flex justify-content-between align-items-center me-auto">
-              <Nav.Link as={Link} to="/BlogPage">
+              <Nav.Link as={Link} to="/BlogPage" className="HoverNavLink">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/ContattiPage">
+              <Nav.Link as={Link} to="/ContattiPage" className="HoverNavLink">
                 Contatti
               </Nav.Link>
               <Nav.Link className="HoverNavLink" href="">

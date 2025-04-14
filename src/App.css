@@ -2,15 +2,16 @@
 
 /* Global Styles */
 body {
-  margin: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
   font-family: Poppins, Inter, sans-serif;
-  background-color: #ffeae3;
+  background-color: #fff0d5;
 }
 
 /* NavBar */
 
 .bgNavBar {
-  background-color: #feefea;
+  background-color: #f9e8c8;
   color: #06050e;
 }
 
@@ -45,7 +46,7 @@ body {
 
 .hero-section {
   position: relative;
-  height: 50vh;
+  height: 55vh;
   background-image: url("https://downtobaker.com/wp-content/uploads/2020/12/giappone-japan-1920x912-1.jpg?w=1920&h=768&crop=1");
   background-size: cover;
   background-position: center;
@@ -93,10 +94,21 @@ body {
   color: white;
 }
 
+/* Login Page css*/
+
+.backgroundLogin {
+  background-image: url("./assets/Japan2.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
 /* Footer */
-footer {
-  background: #ffeae3;
+.footer {
+  background: #f9e8c8;
   color: #06050e;
+
   padding: 40px 0;
   font-family: Arial, sans-serif;
 }
@@ -105,7 +117,7 @@ footer {
   display: flex;
   justify-content: space-around;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 50px auto;
   flex-wrap: wrap;
 }
 
