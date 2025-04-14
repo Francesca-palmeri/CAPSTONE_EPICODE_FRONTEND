@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Container, Row, Col, Card, Alert, Spinner } from "react-bootstrap"
 import GiorniViaggioComponent from "./GiorniViaggioComponent"
-import PrenotaButtonComponent from "./PrenotaButtonComponent"
 import PrenotazioneFormComponent from "./PrenotazioniFormComponent"
 
 const DettagliViaggioComponent = () => {
@@ -71,6 +70,7 @@ const DettagliViaggioComponent = () => {
               />
             )}
             <p className="mt-3">{viaggio.descrizione}</p>
+            <p>Giorni di viaggio: {viaggio.durataGiorni}</p>
             <p>
               Dal:{" "}
               {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT", {
@@ -87,12 +87,11 @@ const DettagliViaggioComponent = () => {
             </p>
 
             <Card.Text className="fw-bold">
-              Prezzo: {viaggio.prezzo} €
+              Prezzo: Da {viaggio.prezzo} € a persona
             </Card.Text>
             <Card.Text className="fw-bold">
               Tipologia: {viaggio.tipologia}
             </Card.Text>
-            <PrenotaButtonComponent viaggioId={id} />
           </Card>
         </Col>
       </Row>

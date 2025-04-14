@@ -11,6 +11,9 @@ function NavBarComponent() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthenticated } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
+  const userName =
+    user?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
 
   const handleLogout = () => {
     dispatch(logout())
@@ -36,7 +39,7 @@ function NavBarComponent() {
               <Nav.Link as={Link} to="/" className="HoverNavLink">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/viaggi" className="HoverNavLink">
+              <Nav.Link as={Link} to="/Viaggi" className="HoverNavLink">
                 Viaggi
               </Nav.Link>
             </div>
@@ -55,19 +58,19 @@ function NavBarComponent() {
           <div className="d-lg-flex mx-2">
             {!isAuthenticated ? (
               <>
-                <Nav.Link className="nav-item">
-                  <Link className="nav-link me-2" to="/RegistrationPage">
-                    Registrazione
-                  </Link>
+                <Nav.Link
+                  as={Link}
+                  to="/RegistrationPage"
+                  className="nav-item  mx-2"
+                >
+                  Registrazione
                 </Nav.Link>
-                <Nav.Link className="nav-item">
-                  <Link className="nav-link " to="/LoginPage">
-                    Login
-                  </Link>
+                <Nav.Link as={Link} to="/LoginPage" className="nav-item">
+                  Login
                 </Nav.Link>
               </>
             ) : (
-              <NavDropdown title="Account" id="basic-nav-dropdown">
+              <NavDropdown title={`${userName}`} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/Profilo">
                   Profilo
                 </NavDropdown.Item>

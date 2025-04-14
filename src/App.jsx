@@ -10,7 +10,9 @@ import ViaggiComponent from "./components/ViaggiCatalogoComponent"
 import DettagliViaggioComponent from "./components/DettagliViaggioComponent"
 import PrenotazioniComponent from "./components/PrenotazioniComponent"
 import PrenotazioneFormComponent from "./components/PrenotazioniFormComponent"
-
+import ProfiloComponent from "./components/ProfiloComponent"
+import BlogPageComponent from "./components/BlogPageComponent"
+import BlogDettaglioComponent from "./components/BlogDettaglioComponent"
 const App = () => (
   <BrowserRouter>
     <NavBarComponent />
@@ -25,6 +27,9 @@ const App = () => (
         path="/PrenotazioniPersonalizzate"
         element={<PrenotazioneFormComponent />}
       />
+      <Route path="/Profilo" element={<ProfiloComponent />} />
+      <Route path="/BlogPage" element={<BlogPageComponent />} />
+      <Route path="/blog/:postId" element={<BlogDettaglioComponent />} />
     </Routes>
     <FooterComponent />
   </BrowserRouter>

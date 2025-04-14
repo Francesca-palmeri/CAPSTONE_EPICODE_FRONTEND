@@ -10,9 +10,10 @@ export const PRENOTAZIONI_ADMIN_START = "PRENOTAZIONI_ADMIN_START"
 export const PRENOTAZIONI_ADMIN_SUCCESS = "PRENOTAZIONI_ADMIN_SUCCESS"
 export const PRENOTAZIONI_ADMIN_FAILURE = "PRENOTAZIONI_ADMIN_FAILURE"
 
+export const UPDATE_PRENOTAZIONE_SUCCESS = "UPDATE_PRENOTAZIONE_SUCCESS"
+
 export const DELETE_SUCCESS = "DELETE_SUCCESS"
 
-// POST - Effettua prenotazione
 export const EffettuaPrenotazione = (prenotazioneData) => async (dispatch) => {
   dispatch({ type: PRENOTAZIONE_START })
 
@@ -36,7 +37,6 @@ export const EffettuaPrenotazione = (prenotazioneData) => async (dispatch) => {
   }
 }
 
-// GET - Prenotazioni dell’utente
 export const GetPrenotazioniUtente = (utenteId) => async (dispatch) => {
   dispatch({ type: PRENOTAZIONI_UTENTE_START })
 
@@ -61,7 +61,6 @@ export const GetPrenotazioniUtente = (utenteId) => async (dispatch) => {
   }
 }
 
-// GET - Prenotazioni per admin
 export const GetTutteLePrenotazioni = () => async (dispatch) => {
   dispatch({ type: PRENOTAZIONI_ADMIN_START })
 
@@ -78,6 +77,32 @@ export const GetTutteLePrenotazioni = () => async (dispatch) => {
     dispatch({ type: PRENOTAZIONI_ADMIN_SUCCESS, payload: data })
   } catch (err) {
     dispatch({ type: PRENOTAZIONI_ADMIN_FAILURE, payload: err.message })
+  }
+}
+
+export const UpdatePrenotazione = (dto) => async (dispatch) => {
+  try {
+    const res = await fetch(
+      `https://localhost:7156/api/Prenotazioni/${dto.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(dto),
+      }
+    )
+
+    if (!res.ok) throw new Error("Errore aggiornamento")
+
+    const data = await res.json()
+    dispatch({
+      type: UPDATE_PRENOTAZIONE_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    console.error("Update error:", error)
   }
 }
 

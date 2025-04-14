@@ -129,6 +129,10 @@ const PrenotazioneFormComponent = () => {
     return (
       <Container className="my-5">
         <h3 className="mb-4">Effettua una prenotazione</h3>
+        <p>
+          Seleziona il viaggio che più ti interessa e se hai rischieste
+          particolari inseriscile dentro il form sotto "RICHIESTE AGGIUNTIVE"
+        </p>
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
@@ -151,18 +155,6 @@ const PrenotazioneFormComponent = () => {
               </Form.Select>
             )}
           </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Data prenotazione</Form.Label>
-            <Form.Control
-              type="date"
-              name="dataPrenotazione"
-              value={formData.dataPrenotazione}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Numero partecipanti</Form.Label>
             <Form.Control
@@ -190,7 +182,7 @@ const PrenotazioneFormComponent = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Note</Form.Label>
+            <Form.Label>Richieste aggiuntive</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}

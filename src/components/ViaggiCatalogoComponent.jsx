@@ -166,7 +166,7 @@ const ViaggiCatalogoComponent = () => {
                   Durata: {viaggio.durataGiorni} giorni
                 </Card.Text>
                 <Card.Text className="fw-bold">
-                  Prezzo: €{viaggio.prezzo}
+                  Prezzo: Da {viaggio.prezzo} € a persona
                 </Card.Text>
                 <Card.Text className="fw-bold">
                   Tipologia: <br /> {viaggio.tipologia}

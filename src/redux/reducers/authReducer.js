@@ -16,7 +16,7 @@ const decoded = storedToken ? decodeToken(storedToken) : null
 const initialState = {
   token: storedToken || null,
   isAuthenticated: !!storedToken,
-  user: decoded || null, // user da token
+  user: decoded || null,
   error: null,
 }
 
