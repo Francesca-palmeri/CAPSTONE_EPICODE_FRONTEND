@@ -6,6 +6,7 @@ import giorniViaggioReducer from "../reducers/giorniReducer"
 import prenotazioneReducer from "../reducers/prenotazioneReducer"
 import prenotazioniListaReducer from "../reducers/prenotazioniListaReducer"
 import blogReducer from "../reducers/blogReducer"
+import frasiReducer from "../reducers/frasiReducer"
 
 const mainReducer = combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ const mainReducer = combineReducers({
   prenotazione: prenotazioneReducer,
   prenotazioniLista: prenotazioniListaReducer,
   blog: blogReducer,
+  frasi: frasiReducer,
 })
 
 const store = configureStore({

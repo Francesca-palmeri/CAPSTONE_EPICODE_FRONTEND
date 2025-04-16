@@ -33,9 +33,10 @@ const BlogDettaglioComponent = () => {
             Pubblicato il:{" "}
             {new Date(post.dataPubblicazione).toLocaleDateString("it-IT")}
           </Card.Subtitle>
-          <Card.Text style={{ whiteSpace: "pre-line" }}>
-            {post.contenuto}
-          </Card.Text>
+          <Card.Text
+            className="contenuto-blog"
+            dangerouslySetInnerHTML={{ __html: post.contenuto }}
+          ></Card.Text>
           <Card.Text className="text-end">
             <strong>Categoria:</strong> {post.categoria}
           </Card.Text>
@@ -56,11 +57,6 @@ const BlogDettaglioComponent = () => {
                   <Card.Img variant="top" src={p.immagineCopertina} />
                   <Card.Body>
                     <Card.Title>{p.titolo}</Card.Title>
-                    <Card.Text>
-                      {p.contenuto.length > 150
-                        ? p.contenuto.substring(0, 150) + "..."
-                        : p.contenuto}
-                    </Card.Text>
                     <Link
                       to={`/blog/${p.id}`}
                       className="btn btn-primary btn-sm"

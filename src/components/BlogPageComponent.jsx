@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getBlogPosts } from "../redux/actions/blogActions"
 import {
@@ -15,12 +15,20 @@ import { Link } from "react-router-dom"
 const BlogPageComponent = () => {
   const dispatch = useDispatch()
   const { lista, loading, error } = useSelector((state) => state.blog)
+  const [categoriaSelezionata, setCategoriaSelezionata] = useState("Tutte")
 
   console.log(lista)
 
   useEffect(() => {
     dispatch(getBlogPosts())
   }, [dispatch])
+
+  const categorie = Array.from(new Set(lista.map((p) => p.categoria))).sort()
+
+  const articoliFiltrati =
+    categoriaSelezionata === "Tutte"
+      ? lista
+      : lista.filter((p) => p.categoria === categoriaSelezionata)
 
   return (
     <Container className="my-5">
@@ -29,11 +37,40 @@ const BlogPageComponent = () => {
       {loading && <Spinner animation="border" />}
       {error && <Alert variant="danger">Errore: {error}</Alert>}
 
-      <Row className="mx-5">
-        {Array.isArray(lista) &&
-          lista.map((post) => (
-            <Col key={post.id} sm={12} className="mb-4">
-              <Card className="h-100 shadow-sm ">
+      <div className="mb-4 text-center">
+        <span
+          className={`badge rounded-pill me-2 px-3 py-2 ${
+            categoriaSelezionata === "Tutte"
+              ? "bg-primary"
+              : "bg-light text-dark border"
+          }`}
+          style={{ cursor: "pointer" }}
+          onClick={() => setCategoriaSelezionata("Tutte")}
+        >
+          Tutte
+        </span>
+
+        {categorie.map((cat, index) => (
+          <span
+            key={index}
+            className={`badge rounded-pill me-2 px-3 py-2 ${
+              categoriaSelezionata === cat
+                ? "bg-primary"
+                : "bg-light text-dark border"
+            }`}
+            style={{ cursor: "pointer" }}
+            onClick={() => setCategoriaSelezionata(cat)}
+          >
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      <Row className="m-5 ">
+        <Row>
+          {articoliFiltrati.map((post) => (
+            <Col key={post.id} md={6} lg={4} className="mb-4">
+              <Card className="h-100 shadow-sm">
                 {post.immagineCopertina && (
                   <Card.Img
                     variant="top"
@@ -52,10 +89,7 @@ const BlogPageComponent = () => {
                       "it-IT"
                     )}
                   </Card.Text>
-                  {/*<Card.Text>{post.contenuto.slice(0, 120)}...</Card.Text>*/}
-                  <Card.Subtitle className=" text-end text-muted">
-                    Categoria: {post.categoria}
-                  </Card.Subtitle>
+
                   <Button
                     as={Link}
                     to={`/blog/${post.id}`}
@@ -68,6 +102,7 @@ const BlogPageComponent = () => {
               </Card>
             </Col>
           ))}
+        </Row>
       </Row>
     </Container>
   )

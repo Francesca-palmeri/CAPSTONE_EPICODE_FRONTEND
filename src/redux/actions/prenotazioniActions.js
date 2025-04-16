@@ -51,8 +51,14 @@ export const GetPrenotazioniUtente = (utenteId) => async (dispatch) => {
       }
     )
 
-    if (!res.ok)
-      throw new Error("Errore nel recupero delle prenotazioni utente")
+    if (!res.ok) {
+      const errorMessage =
+        res.status === 404
+          ? "Nessuna prenotazione trovata per l'utente selezionato."
+          : "Errore nel recupero delle prenotazioni utente"
+
+      throw new Error(errorMessage)
+    }
 
     const data = await res.json()
     dispatch({ type: PRENOTAZIONI_UTENTE_SUCCESS, payload: data })

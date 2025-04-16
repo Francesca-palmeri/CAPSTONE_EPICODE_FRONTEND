@@ -10,6 +10,7 @@ import {
   ListGroup,
 } from "react-bootstrap"
 import { GetPrenotazioniUtente } from "../redux/actions/prenotazioniActions"
+import { updateAvatarUrl, deleteAvatar } from "../redux/actions/authActions"
 
 const ProfiloComponent = () => {
   const dispatch = useDispatch()
@@ -37,6 +38,9 @@ const ProfiloComponent = () => {
 
         const data = await res.json()
         setProfilo(data)
+
+        const utenteId = data.id
+        dispatch(GetPrenotazioniUtente(utenteId))
       } catch (err) {
         setErroreProfilo(err.message)
       } finally {
@@ -44,11 +48,10 @@ const ProfiloComponent = () => {
       }
     }
 
-    if (isAuthenticated) {
+    if (isAuthenticated && token) {
       fetchProfilo()
-      dispatch(GetPrenotazioniUtente())
     }
-  }, [isAuthenticated, token, dispatch])
+  }, [dispatch, isAuthenticated, token])
 
   if (!isAuthenticated) {
     return (
@@ -79,15 +82,60 @@ const ProfiloComponent = () => {
 
   return (
     <Container className="my-5">
+      {/* PROFILO */}
       <Card className="shadow p-4 mb-5">
         <Row className="align-items-center">
           <Col md={4} className="text-center">
             <img
-              src="/img/user-avatar.png"
-              alt="User Avatar"
-              style={{ width: "150px", borderRadius: "50%" }}
+              src={profilo.avatarUrl || "/img/user-avatar.png"}
+              alt="Avatar utente"
+              style={{
+                width: "150px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+              className="mb-3"
             />
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                const url = e.target.avatarUrl.value
+                if (url) {
+                  dispatch(updateAvatarUrl(url))
+                  setProfilo((prev) => ({ ...prev, avatarUrl: url }))
+                  e.target.reset()
+                }
+              }}
+            >
+              <input
+                type="url"
+                name="avatarUrl"
+                placeholder="Incolla un link immagine"
+                className="form-control mb-2"
+                required
+              />
+              <button
+                className="btn btn-outline-primary btn-sm w-100"
+                type="submit"
+              >
+                Aggiorna avatar da URL
+              </button>
+            </form>
+
+            <button
+              className="btn btn-outline-danger btn-sm w-100 mt-2"
+              onClick={() => {
+                if (window.confirm("Sei sicuro di voler rimuovere l'avatar?")) {
+                  dispatch(deleteAvatar())
+                  setProfilo((prev) => ({ ...prev, avatarUrl: null }))
+                }
+              }}
+            >
+              Rimuovi avatar
+            </button>
           </Col>
+
           <Col md={8}>
             <h3 className="mb-3">
               {profilo.firstName} {profilo.lastName}
@@ -106,12 +154,13 @@ const ProfiloComponent = () => {
         </Row>
       </Card>
 
+      {/* PRENOTAZIONI */}
       <h4 className="mb-3">Le tue prenotazioni</h4>
       {loading ? (
         <Spinner animation="border" />
       ) : error ? (
         <Alert variant="danger">{error}</Alert>
-      ) : prenotazioni && prenotazioni.length > 0 ? (
+      ) : prenotazioni?.length > 0 ? (
         <ListGroup>
           {prenotazioni.map((p) => (
             <ListGroup.Item key={p.id}>

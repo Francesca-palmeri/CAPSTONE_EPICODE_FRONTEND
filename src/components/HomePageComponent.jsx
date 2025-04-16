@@ -26,7 +26,7 @@ const HomePageComponent = () => {
           </div>
         </div>
       </div>
-      {/* Content Section */} {/* Sezione 3 Viaggi */}
+
       <div className="container text-center my-5">
         <h2 className="mb-4">Scegli il tuo viaggio</h2>
         <div className="row">

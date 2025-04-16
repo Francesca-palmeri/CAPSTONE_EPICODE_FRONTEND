@@ -9,13 +9,19 @@ import FooterComponent from "./components/FooterComponent"
 import ViaggiComponent from "./components/ViaggiCatalogoComponent"
 import DettagliViaggioComponent from "./components/DettagliViaggioComponent"
 import PrenotazioniComponent from "./components/PrenotazioniComponent"
-import PrenotazioneFormComponent from "./components/PrenotazioniFormComponent"
 import ProfiloComponent from "./components/ProfiloComponent"
 import BlogPageComponent from "./components/BlogPageComponent"
 import BlogDettaglioComponent from "./components/BlogDettaglioComponent"
+import ScrollToTop from "./components/ScrollToTop"
+import FaqComponent from "./components/FaqComponent"
+import FrasiUtiliComponent from "./components/FrasiUtiliComponent"
+import PrenotazioniPersonalizzateComponent from "./components/PrenotazioniPersonalizzate"
+import ErrorComponent from "./components/ErrorComponent"
+
 const App = () => (
   <BrowserRouter>
     <NavBarComponent />
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<HomePageComponent />} />
       <Route path="/LoginPage" element={<LoginComponent />} />
@@ -24,12 +30,16 @@ const App = () => (
       <Route path="/Viaggi/:id" element={<DettagliViaggioComponent />} />
       <Route path="/Prenotazioni" element={<PrenotazioniComponent />} />
       <Route
-        path="/PrenotazioniPersonalizzate"
-        element={<PrenotazioneFormComponent />}
+        path="/ViaggiPersonalizzati"
+        element={<PrenotazioniPersonalizzateComponent />}
       />
       <Route path="/Profilo" element={<ProfiloComponent />} />
       <Route path="/BlogPage" element={<BlogPageComponent />} />
       <Route path="/blog/:postId" element={<BlogDettaglioComponent />} />
+      <Route path="ContattiPage" />
+      <Route path="/FAQ" element={<FaqComponent />} />
+      <Route path="/frasi-utili" element={<FrasiUtiliComponent />} />
+      <Route path="*" element={<ErrorComponent />} />
     </Routes>
     <FooterComponent />
   </BrowserRouter>

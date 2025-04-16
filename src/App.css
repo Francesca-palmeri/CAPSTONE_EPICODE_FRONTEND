@@ -5,18 +5,17 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Poppins, Inter, sans-serif;
-  background-color: #fff0d5;
+  background-color: #fff8eb;
 }
 
 /* NavBar */
 
 .bgNavBar {
-  background-color: #f9e8c8;
   color: #06050e;
 }
 
 .logoNavbar {
-  width: 220px;
+  width: 180px;
   margin: 0;
   padding: 0;
 }
@@ -160,4 +159,11 @@ body {
   padding: 10px 0;
   font-size: 14px;
   margin-top: 20px;
+}
+
+/*---BLOG DETAILS CSS */
+.jp {
+  font-weight: bold;
+  color: #4f1616;
+  font-family: "Noto Sans JP", sans-serif;
 }

@@ -22,10 +22,13 @@ const FooterComponent = () => {
           <h2>Link Utili</h2>
           <ul>
             <li>
-              <a href="/viaggi">Viaggi</a>
+              <a href="/Viaggi">Viaggi</a>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <a href="/BlogPage">Blog</a>
+            </li>
+            <li>
+              <a href="/frasi-utili">Frasi Utili</a>
             </li>
             <li>
               <a href="/contatti">Contatti</a>

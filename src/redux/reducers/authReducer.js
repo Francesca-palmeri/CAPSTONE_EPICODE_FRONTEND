@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../actions/authActions"
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  AVATAR_URL_UPDATE_SUCCESS,
+  AVATAR_DELETE_SUCCESS,
+} from "../actions/authActions"
 
 // Funzione per decodificare il token
 const decodeToken = (token) => {
@@ -51,6 +57,22 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: null,
         error: null,
+      }
+    case AVATAR_URL_UPDATE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatarUrl: action.payload,
+        },
+      }
+    case AVATAR_DELETE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatarUrl: null,
+        },
       }
 
     default:

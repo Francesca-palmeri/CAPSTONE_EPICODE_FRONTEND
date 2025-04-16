@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Container, Row, Col, Card, Alert, Spinner } from "react-bootstrap"
 import GiorniViaggioComponent from "./GiorniViaggioComponent"
 import PrenotazioneFormComponent from "./PrenotazioniFormComponent"
+import ViaggiRandomComponent from "./ViaggiRandomComponent"
 
 const DettagliViaggioComponent = () => {
   const { id } = useParams()
@@ -72,18 +73,8 @@ const DettagliViaggioComponent = () => {
             <p className="mt-3">{viaggio.descrizione}</p>
             <p>Giorni di viaggio: {viaggio.durataGiorni}</p>
             <p>
-              Dal:{" "}
-              {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })}{" "}
-              al:{" "}
-              {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })}
+              Dal: {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT")}{" "}
+              al: {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT")}
             </p>
 
             <Card.Text className="fw-bold">
@@ -102,6 +93,11 @@ const DettagliViaggioComponent = () => {
         <Col>
           <h2 className="mb-4">Prenota il tuo viaggio con noi</h2>
           <PrenotazioneFormComponent />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <ViaggiRandomComponent quantità={4} />
         </Col>
       </Row>
     </Container>

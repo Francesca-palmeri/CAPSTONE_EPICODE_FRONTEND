@@ -24,3 +24,59 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const logout = () => ({ type: LOGOUT })
+
+export const AVATAR_URL_UPDATE_SUCCESS = "AVATAR_URL_UPDATE_SUCCESS"
+export const AVATAR_UPDATE_FAILURE = "AVATAR_UPDATE_FAILURE"
+
+export const updateAvatarUrl = (url) => async (dispatch) => {
+  try {
+    const res = await fetch(
+      "https://localhost:7156/api/Account/profile/avatar",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(url),
+      }
+    )
+
+    const data = await res.json()
+
+    if (res.ok) {
+      dispatch({ type: AVATAR_URL_UPDATE_SUCCESS, payload: data.avatarUrl })
+    } else {
+      dispatch({ type: AVATAR_UPDATE_FAILURE, payload: data.message })
+    }
+  } catch (err) {
+    dispatch({ type: AVATAR_UPDATE_FAILURE, payload: err.message })
+  }
+}
+
+export const AVATAR_DELETE_SUCCESS = "AVATAR_DELETE_SUCCESS"
+export const AVATAR_DELETE_FAILURE = "AVATAR_DELETE_FAILURE"
+
+export const deleteAvatar = () => async (dispatch) => {
+  try {
+    const res = await fetch(
+      "https://localhost:7156/api/Account/profile/avatar",
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
+
+    const data = await res.json()
+
+    if (res.ok) {
+      dispatch({ type: AVATAR_DELETE_SUCCESS })
+    } else {
+      dispatch({ type: AVATAR_DELETE_FAILURE, payload: data.message })
+    }
+  } catch (err) {
+    dispatch({ type: AVATAR_DELETE_FAILURE, payload: err.message })
+  }
+}

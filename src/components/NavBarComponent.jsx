@@ -42,6 +42,13 @@ function NavBarComponent() {
               <Nav.Link as={Link} to="/Viaggi" className="HoverNavLink">
                 Viaggi
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="ViaggiPersonalizzati"
+                className="HoverNavLink"
+              >
+                Viaggi personalizzati
+              </Nav.Link>
             </div>
             <div className="d-lg-flex justify-content-between align-items-center me-auto">
               <Nav.Link as={Link} to="/BlogPage" className="HoverNavLink">
@@ -50,7 +57,7 @@ function NavBarComponent() {
               <Nav.Link as={Link} to="/ContattiPage" className="HoverNavLink">
                 Contatti
               </Nav.Link>
-              <Nav.Link className="HoverNavLink" href="">
+              <Nav.Link as={Link} to="/FAQ" className="HoverNavLink">
                 FAQ
               </Nav.Link>
             </div>
@@ -71,6 +78,13 @@ function NavBarComponent() {
               </>
             ) : (
               <NavDropdown title={`${userName}`} id="basic-nav-dropdown">
+                <div>
+                  <img
+                    src={`user.avatarUrl`}
+                    alt="Logo"
+                    className="logoNavbar"
+                  />
+                </div>
                 <NavDropdown.Item as={Link} to="/Profilo">
                   Profilo
                 </NavDropdown.Item>
