@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap"
+import { Eye, EyeSlash } from "react-bootstrap-icons"
 
 const RegisterComponent = () => {
   const navigate = useNavigate()
@@ -23,6 +24,8 @@ const RegisterComponent = () => {
 
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const validateForm = (name, value) => {
     let newErrors = { ...errors }
@@ -81,42 +84,47 @@ const RegisterComponent = () => {
   }
 
   return (
-    <Container className="my-5">
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <h2 className="text-center mb-4">Registrati</h2>
-
+    <Container fluid className="register-bg-img">
+      <Row className="justify-content-center m-0">
+        <Col xs={8} md={6} className=" d-flex flex-column columnRegister pt-3">
+          <h2 className="text-white text-center titleLog">Registrati</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Nome</Form.Label>
+          <Form
+            className=" d-flex flex-column text-center p-2"
+            onSubmit={handleSubmit}
+          >
+            <Form.Group className="m-0">
+              <Form.Label className="mt-1 mb-0">Nome</Form.Label>
               <Form.Control
                 type="text"
                 name="firstName"
+                className="reglogFormControl"
                 value={form.firstName}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Cognome</Form.Label>
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Cognome</Form.Label>
               <Form.Control
                 type="text"
                 name="lastName"
+                className="reglogFormControl"
                 value={form.lastName}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Data di nascita</Form.Label>
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Data di Nascita</Form.Label>
               <Form.Control
                 type="date"
                 name="birthDate"
+                className="reglogFormControl"
                 value={form.birthDate}
                 onChange={handleChange}
                 required
@@ -127,22 +135,24 @@ const RegisterComponent = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Numero di telefono</Form.Label>
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Numero di telefono</Form.Label>
               <Form.Control
                 type="text"
                 name="phoneNumber"
+                className="reglogFormControl "
                 value={form.phoneNumber}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Username</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
+                className="reglogFormControl"
                 value={form.username}
                 onChange={handleChange}
                 required
@@ -153,33 +163,43 @@ const RegisterComponent = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Email</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
+                className="reglogFormControl"
                 value={form.email}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                required
-                isInvalid={!!errors.password}
-              />
+            <Form.Group className="m-0">
+              <Form.Label className="mt-2 mb-0">Password</Form.Label>
+              <div className="position-relative">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="reglogFormControl position-relative"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  isInvalid={!!errors.password}
+                />
+                <span
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="IconShowPassword position-absolute"
+                >
+                  {showPassword ? <Eye /> : <EyeSlash />}
+                </span>
+              </div>
               <Form.Control.Feedback type="invalid">
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="w-100">
+            <Button type="submit" className="RegisterButton">
               Registrati
             </Button>
           </Form>

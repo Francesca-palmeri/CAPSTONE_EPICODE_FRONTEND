@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../redux/actions/authActions.js"
 import { useNavigate } from "react-router-dom"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import { EyeSlash, Eye } from "react-bootstrap-icons"
 
 const LoginComponent = () => {
   const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const LoginComponent = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const [showPassword, setShowPassword] = useState(false)
   useEffect(() => {
     if (token) {
       navigate("/")
@@ -25,40 +26,58 @@ const LoginComponent = () => {
 
   return (
     <>
-      <Container fluid className="backgroundLogin">
-        <Row>
-          <Col className="col-12 ">
-            <div className=""></div>
-            <form
+      <Container fluid className="register-bg-img ">
+        <Row className=" m-0">
+          <Col className=" d-flex  justify-content-center align-items-center">
+            <Form
               onSubmit={handleSubmit}
-              className="d-flex flex-column align-items-center mt-4"
+              className="d-flex flex-column align-items-center mx-auto columnRegister"
             >
-              <h2>Login</h2>
-              <div className="form-group my-2">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+              <div className=" d-flex flex-column loginFormGroup">
+                <h2 className="text-white text-center  titleLog">Benvenuto!</h2>
+                <h5 className=" jp m-auto">ようこそ！</h5>
+                <Form.Group className="mt-3 text-center">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    className="reglogFormControl"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mt-5 text-center">
+                  <Form.Label>Password</Form.Label>
+                  <div className="position-relative">
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      className="reglogFormControl"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <span
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                        color: "black",
+                        fontSize: "1.rem",
+                      }}
+                    >
+                      {showPassword ? <Eye /> : <EyeSlash />}
+                    </span>
+                  </div>
+                </Form.Group>
+                <Button type="submit" className="RegisterButton">
+                  Login
+                </Button>
+                {error && <p className="text-danger">{error}</p>}
               </div>
-              <div className="form-group my-2">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary my-2">
-                Login
-              </button>
-              {error && <p className="text-danger">{error}</p>}
-            </form>
+            </Form>
           </Col>
         </Row>
       </Container>
