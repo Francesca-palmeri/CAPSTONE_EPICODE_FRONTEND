@@ -1,5 +1,13 @@
 import SezioneViaggiComponent from "./SezioneViaggiComponent"
-import { Container, Row, Col } from "react-bootstrap"
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+} from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 const HomePageComponent = () => {
@@ -27,11 +35,17 @@ const HomePageComponent = () => {
         </div>
       </div>
 
-      <Container className=" text-center my-5">
+      <Container className=" text-center mt-5">
         <Row>
-          <h2 className=" titleSlogan">Sogni di andare in Giappone?</h2>
+          <div className=" d-flex justify-content-center align-items-center">
+            <h2 className=" pt-2 pb-3 titleSlogan">
+              Silenzio, armonia, bellezza. <br />
+              <span className=" text-decoration-underline">Giappone</span>
+            </h2>{" "}
+          </div>
+
           <Col className="">
-            <p className=" fst-italic fs-5 mt-2 mb-4">
+            <p className=" fst-italic fs-4 mt-2 mb-4">
               Potrai scoprire meravigliose città e conoscere una cultura dalle
               radici profonde, immergendoti in paesaggi, esperienze
               accattivanti, divertenti e anche spirituali.
@@ -40,68 +54,91 @@ const HomePageComponent = () => {
         </Row>
       </Container>
       <Container fluid className="p-0">
-        <p className=" backgroundSlogan w-100 text-center fs-4 py-2 mb-0 mx-0">
+        <p className=" backgroundSlogan text-center fs-4 fw-semibold py-2">
           In gruppo o da soli potrete scegliere tra diversi itinerari o
           richiederne uno personalizzato!
         </p>
 
-        <Row className=" flex-md-wrap justify-content-md-center align-items-md-center ps-1 ">
+        <Row className=" flex-md-wrap flex-lg-nowrap justify-content-md-center align-items-md-center w-100 ps-4">
           <Col md={6} lg={4} className=" text-center p-3">
-            <div className="card h-100 shadow backgroundCard">
+            <Card className=" shadow backgroundCard">
               <img
                 src="https://www.itcattaneo.it/wp-content/uploads/2021/05/Visitare-il-Giappone.jpg"
-                className="card-img-top"
+                className="card-img-top h-50 "
                 alt="Viaggi di Gruppo"
               />
-              <div className="card-body ">
-                <h5 className="card-title RedTitles">Viaggi di Gruppo</h5>
-                <p className="card-text">
+              <CardBody className="">
+                <CardTitle className="RedTitles">Viaggi di Gruppo</CardTitle>
+                <CardText className=" py-lg-2 py-xl-4 px-xl-2">
                   Unisciti ad altri appassionati per un'avventura guidata in
                   Giappone.
-                </p>
-              </div>
-            </div>
+                </CardText>
+              </CardBody>
+            </Card>
           </Col>
           <Col md={6} lg={4} className="text-center p-3">
-            <div className="card h-100 shadow backgroundCard">
+            <Card className=" shadow backgroundCard">
               <img
                 src="https://www.viaggidelgenio.it/wp-content/uploads/2023/09/2-1.jpg"
-                className="card-img-top"
+                className="card-img-top h-50 "
                 alt="Viaggi Autonomi"
               />
-              <div className="card-body">
-                <h5 className="card-title  RedTitles">Viaggi in Autonomia</h5>
-                <p className="card-text">
+              <CardBody className="card-body">
+                <CardTitle className="card-title  RedTitles">
+                  Viaggi in Autonomia
+                </CardTitle>
+                <CardText className="card-text  py-lg-2 py-xl-4 px-xl-2">
                   Itinerari suggeriti per esplorare in libertà, con il nostro
                   supporto.
-                </p>
-              </div>
-            </div>
+                </CardText>
+              </CardBody>
+            </Card>
           </Col>
           <Col md={6} lg={4} className="text-center p-3">
-            <div className="card h-100 shadow backgroundCard">
+            <Card className=" shadow backgroundCard">
               <img
                 src="https://travel.thewom.it/content/uploads/sites/4/2025/02/Motivi-per-visitare-il-giappone-704x528.jpg"
-                className="card-img-top"
+                className="card-img-top h-50 "
                 alt="Viaggi Personalizzati"
               />
-              <div className="card-body">
-                <h5 className="card-title  RedTitles">Viaggi Personalizzati</h5>
-                <p className="card-text">
+              <CardBody className="card-body">
+                <CardTitle className="card-title  RedTitles">
+                  Viaggi Personalizzati
+                </CardTitle>
+                <CardText className="card-text py-lg-2 py-xl-4 px-xl-2">
                   Costruiamo insieme il tuo viaggio ideale, su misura per te.
-                </p>
-              </div>
-            </div>
+                </CardText>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </Container>
 
-      <div>
+      <div className=" bordo mt-3 d-flex flex-column justify-content-center align-items-center">
+        <h2 class="titleProposte">LE NOSTRE PROPOSTE</h2>
+        <p class="subtitleProposte">
+          I nostri itinerari pensati per ogni tipo di viaggiatore.
+        </p>
         <SezioneViaggiComponent />
       </div>
-      <div>
-        <Link to={"/Viaggi"}>PRENOTA</Link>
-      </div>
+      <section class="prenota-cta">
+        <div class="cta-wrapper text-white d-flex flex-column align-items-center">
+          <h3>
+            Il Giappone ti aspetta: <br />
+            scegli la tua prossima avventura!
+          </h3>
+          <p>
+            Esplora le nostre proposte di viaggio in gruppo, in autonomia o
+            personalizzate e inizia a pianificare l’esperienza perfetta per te.
+          </p>
+          <Link
+            to={"/Viaggi"}
+            className="btn prenota-btn d-flex flex-column justify-content-center align-items-center"
+          >
+            <span>PRENOTA ORA</span>
+          </Link>
+        </div>
+      </section>
     </>
   )
 }

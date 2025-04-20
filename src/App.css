@@ -5,7 +5,8 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Poppins, Inter, sans-serif;
-  background-color: #fff0e4c7;
+  background-color: #fff3ea;
+  font-size: 1.1rem;
 }
 
 /* NavBar */
@@ -119,7 +120,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(70, 70, 70, 0.233);
+  background: rgba(70, 70, 70, 0.205);
   z-index: 1;
 }
 
@@ -133,9 +134,27 @@ body {
 /* Cards Homepage */
 
 .titleSlogan {
-  color: #9a2326;
-  background-color: #fff3ea;
+  color: #c6111a;
+  /*text-shadow: 1px 1px 2px rgb(162, 132, 143);*/
   font-size: 2.5em;
+}
+
+.bordo {
+  border-top: 2px solid #c6111a;
+}
+
+.titleProposte {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5em 0 0 0;
+  color: #2b2b2b;
+  text-align: center;
+}
+
+.subtitleProposte {
+  font-size: 1rem;
+  color: #777;
+  margin: 0.5em 3rem;
 }
 
 .RedTitles {
@@ -144,21 +163,104 @@ body {
   text-align: center;
 }
 
-.card:hover {
+.backgroundCard:hover {
   transform: translateY(-5px);
   transition: transform 0.3s ease;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-.card img {
+.backgroundCard img {
   height: 200px;
   object-fit: cover;
 }
 
 .backgroundCard {
-  background-color: #9a2326;
+  /*background-color: #d29f8a;*/
+  background-color: #860a10;
   border: none;
   color: white;
+  height: 380px;
+}
+
+/*Cards sezioneViaggiComponent*/
+
+.backgroundViaggiCons {
+  background-color: transparent;
+}
+
+.FixedMeasures {
+  /*border: 1px solid #1d3557;**/
+  max-width: 500px;
+  min-height: 460px;
+  box-shadow: rgba(255, 209, 163, 0.591) 0px 2px 4px,
+    rgba(231, 177, 124, 0.591) 0px 7px 13px -3px,
+    rgba(171, 117, 64, 0.741) 0px -3px 0px inset;
+}
+
+.badgeForm {
+  position: absolute;
+  padding: 8px;
+  margin: 5px;
+  top: 0px;
+  right: 0px;
+}
+
+.prenota-cta {
+  background-color: #860a10;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.cta-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-wrapper h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-wrapper p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.prenota-btn {
+  background-color: #fff3ea;
+  border-radius: 10px;
+  color: #000000;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  height: 54px;
+  width: 250px;
+  letter-spacing: 0.4px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
+}
+
+.prenota-btn span {
+  transition: all 200ms;
+}
+
+.prenota-btn:hover span {
+  transform: scale(1.5);
+}
+
+@media screen and (max-width: 991px) {
+  .prenota-btn {
+    font-size: 15px;
+    height: 50px;
+  }
+
+  .prenota-btn span {
+    line-height: 50px;
+  }
 }
 
 /* Registration Page*/
@@ -166,6 +268,17 @@ body {
 .titleLog {
   text-shadow: 1px 1px 3px rgb(0, 0, 0);
   font-size: 2.5rem;
+}
+
+.smalltextLog {
+  font-size: 0.8em;
+  text-shadow: 1px 1px 3px #1a134c;
+}
+
+.redirect-cta {
+  text-decoration: none;
+  text-shadow: 1px 1px #000000;
+  color: #da0021;
 }
 
 .register-bg-img {
@@ -180,11 +293,11 @@ body {
 .columnRegister {
   position: absolute;
   top: 150px;
-  width: 38%;
+  width: 40%;
   height: 40em;
   border: 2px solid white;
   border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
   backdrop-filter: blur(15px);
   color: #ffffff;
 }
@@ -216,7 +329,7 @@ body {
 
 .IconShowPassword {
   position: absolute;
-  right: 170px;
+  right: 190px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -230,13 +343,16 @@ body {
 
 @media screen and (max-width: 1400px) {
   .IconShowPassword {
-    right: 60px;
+    right: 80px;
+  }
+  .columnRegister {
+    height: 38em;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .IconShowPassword {
-    right: 30px;
+    right: 40px;
   }
 }
 
@@ -250,7 +366,7 @@ body {
 
 @media screen and (max-width: 992px) {
   .columnRegister {
-    width: 35%;
+    width: 40%;
   }
   .columnRegister {
     height: 35em;
@@ -263,6 +379,7 @@ body {
   }
   .IconShowPassword {
     top: 30%;
+    right: 50px;
     font-size: 0.9rem;
   }
 }
@@ -278,21 +395,28 @@ body {
     font-size: 0.6em;
   }
   .IconShowPassword {
-    right: 35px;
+    right: 55px;
     font-size: 0.8rem;
+  }
+  .smalltextLog {
+    font-size: small;
   }
 }
 
 @media screen and (max-width: 576px) {
   .columnRegister {
-    width: 40%;
+    width: 50%;
     top: 25%;
   }
   .IconShowPassword {
-    right: 20px;
+    right: 35px;
+    top: 30%;
   }
   .titleLog {
     font-size: 1.5em;
+  }
+  .smalltextLog {
+    font-size: x-small;
   }
 }
 
@@ -357,6 +481,5 @@ body {
 /*---BLOG DETAILS CSS */
 .jp {
   font-weight: bold;
-  color: #4f1616;
   font-family: "Noto Serif JP", sans-serif;
 }

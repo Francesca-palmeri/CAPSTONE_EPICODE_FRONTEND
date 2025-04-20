@@ -1,6 +1,12 @@
-export const LOGIN_FAILURE = "LOGIN_FAILURE"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGIN_FAILURE = "LOGIN_FAILURE"
 export const LOGOUT = "LOGOUT"
+
+export const AVATAR_URL_UPDATE_SUCCESS = "AVATAR_URL_UPDATE_SUCCESS"
+export const AVATAR_UPDATE_FAILURE = "AVATAR_UPDATE_FAILURE"
+export const AVATAR_DELETE_SUCCESS = "AVATAR_DELETE_SUCCESS"
+export const AVATAR_DELETE_FAILURE = "AVATAR_DELETE_FAILURE"
+export const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -18,15 +24,34 @@ export const login = (email, password) => async (dispatch) => {
     const data = await res.json()
     localStorage.setItem("token", data.token)
     dispatch({ type: LOGIN_SUCCESS, payload: data.token })
+
+    dispatch(fetchUserProfile())
   } catch {
     dispatch({ type: LOGIN_FAILURE, payload: "Errore di rete" })
   }
 }
 
-export const logout = () => ({ type: LOGOUT })
+export const logout = () => {
+  localStorage.removeItem("token")
+  return { type: LOGOUT }
+}
 
-export const AVATAR_URL_UPDATE_SUCCESS = "AVATAR_URL_UPDATE_SUCCESS"
-export const AVATAR_UPDATE_FAILURE = "AVATAR_UPDATE_FAILURE"
+export const fetchUserProfile = () => async (dispatch) => {
+  try {
+    const res = await fetch("https://localhost:7156/api/Account/profile", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+
+    if (!res.ok) throw new Error("Errore nel recupero del profilo")
+
+    const data = await res.json()
+    dispatch({ type: SET_USER_PROFILE, payload: data })
+  } catch (err) {
+    console.error("Errore fetch profilo:", err.message)
+  }
+}
 
 export const updateAvatarUrl = (url) => async (dispatch) => {
   try {
@@ -53,9 +78,6 @@ export const updateAvatarUrl = (url) => async (dispatch) => {
     dispatch({ type: AVATAR_UPDATE_FAILURE, payload: err.message })
   }
 }
-
-export const AVATAR_DELETE_SUCCESS = "AVATAR_DELETE_SUCCESS"
-export const AVATAR_DELETE_FAILURE = "AVATAR_DELETE_FAILURE"
 
 export const deleteAvatar = () => async (dispatch) => {
   try {

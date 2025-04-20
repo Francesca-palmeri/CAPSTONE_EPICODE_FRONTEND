@@ -2,27 +2,30 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import { logout } from "../redux/actions/authActions"
 import { BagHeart, BoxArrowLeft, PersonCheck } from "react-bootstrap-icons"
 
 function NavBarComponent() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isAuthenticated } = useSelector((state) => state.auth)
-  const { user } = useSelector((state) => state.auth)
+  const { isAuthenticated, user } = useSelector((state) => state.auth)
+
   const userName =
-    user?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+    user?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
+    user?.firstName + " " + user?.lastName ||
+    "Utente"
+
   const nomeUtente = userName?.split(" ")[0] || "Utente"
+
+  const avatarUrl = user?.avatarUrl || "/img/user-avatar.png"
 
   const handleLogout = () => {
     dispatch(logout())
     navigate("/")
   }
 
-  console.log(user)
   return (
     <Navbar expand="lg" className="bgNavBar">
       <Container
@@ -66,6 +69,7 @@ function NavBarComponent() {
               </Nav.Link>
             </div>
           </Nav>
+
           <div className="d-flex justify-content-between align-items-center ms-auto">
             {!isAuthenticated ? (
               <>
@@ -92,8 +96,8 @@ function NavBarComponent() {
               >
                 <div className=" d-flex justify-content-center align-items-center">
                   <img
-                    src={user.avatarUrl}
-                    alt="Logo"
+                    src={avatarUrl}
+                    alt="Avatar utente"
                     className="imgProfilo mx-2"
                   />
                   <div className="d-flex flex-column mt-2">
@@ -106,7 +110,9 @@ function NavBarComponent() {
                     </NavDropdown.Item>
                   </div>
                 </div>
+
                 <NavDropdown.Divider />
+
                 <div className="d-flex flex-column justify-content-center align-items-center">
                   <h6 className="mt-2">Gestione</h6>
                   <NavDropdown.Item
@@ -128,6 +134,7 @@ function NavBarComponent() {
                 </div>
 
                 <NavDropdown.Divider />
+
                 <div className=" d-flex justify-content-start align-items-baseline">
                   <NavDropdown.Item onClick={handleLogout}>
                     <BoxArrowLeft className="me-2 mb-1 p-0" />

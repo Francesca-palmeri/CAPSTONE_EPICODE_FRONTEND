@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../redux/actions/authActions.js"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import { EyeSlash, Eye } from "react-bootstrap-icons"
 
@@ -75,6 +75,12 @@ const LoginComponent = () => {
                 <Button type="submit" className="RegisterButton">
                   Login
                 </Button>
+                <div className=" smalltextLog d-flex justify-content-center ">
+                  <p>Non sei registrato? </p>{" "}
+                  <Link to={"/RegistrationPage"} className="redirect-cta ms-1">
+                    Crea un account
+                  </Link>
+                </div>
                 {error && <p className="text-danger">{error}</p>}
               </div>
             </Form>

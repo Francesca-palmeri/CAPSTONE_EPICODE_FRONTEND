@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap"
 import { Eye, EyeSlash } from "react-bootstrap-icons"
+import { Link } from "react-router-dom"
 
 const RegisterComponent = () => {
   const navigate = useNavigate()
@@ -86,7 +87,7 @@ const RegisterComponent = () => {
   return (
     <Container fluid className="register-bg-img">
       <Row className="justify-content-center m-0">
-        <Col xs={8} md={6} className=" d-flex flex-column columnRegister pt-3">
+        <Col xs={10} md={6} className=" d-flex flex-column columnRegister pt-3">
           <h2 className="text-white text-center titleLog">Registrati</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
@@ -202,6 +203,12 @@ const RegisterComponent = () => {
             <Button type="submit" className="RegisterButton">
               Registrati
             </Button>
+            <div className=" smalltextLog d-flex justify-content-center ">
+              <p>Possiedi un account? </p>
+              <Link to={"/LoginPage"} className="redirect-cta ms-1">
+                Vai al login
+              </Link>
+            </div>
           </Form>
         </Col>
       </Row>

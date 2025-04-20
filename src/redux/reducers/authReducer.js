@@ -4,16 +4,14 @@ import {
   LOGOUT,
   AVATAR_URL_UPDATE_SUCCESS,
   AVATAR_DELETE_SUCCESS,
+  SET_USER_PROFILE,
 } from "../actions/authActions"
 
-// Funzione per decodificare il token
+// Funzione per decodificare il token (usata solo per dati minimi come email, id, ruoli ecc.)
 const decodeToken = (token) => {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]))
-    return {
-      ...payload,
-      avatarUrl: payload.avatarUrl,
-    }
+    return payload
   } catch {
     return null
   }
@@ -33,15 +31,23 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS: {
       const decodedUser = decodeToken(action.payload)
-      localStorage.setItem("token", action.payload)
       return {
         ...state,
         token: action.payload,
         isAuthenticated: true,
-        user: decodedUser,
+        user: {
+          id: decodedUser?.sub, // o altro campo usato nel JWT
+          email: decodedUser?.email,
+        },
         error: null,
       }
     }
+
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        user: action.payload,
+      }
 
     case LOGIN_FAILURE:
       return {
@@ -53,7 +59,6 @@ const authReducer = (state = initialState, action) => {
       }
 
     case LOGOUT:
-      localStorage.removeItem("token")
       return {
         ...state,
         token: null,
@@ -61,6 +66,7 @@ const authReducer = (state = initialState, action) => {
         user: null,
         error: null,
       }
+
     case AVATAR_URL_UPDATE_SUCCESS:
       return {
         ...state,
@@ -69,6 +75,7 @@ const authReducer = (state = initialState, action) => {
           avatarUrl: action.payload,
         },
       }
+
     case AVATAR_DELETE_SUCCESS:
       return {
         ...state,
