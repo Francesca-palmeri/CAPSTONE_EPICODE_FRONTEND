@@ -3,12 +3,12 @@ import PrenotazioneFormComponent from "./PrenotazioniFormComponent"
 import ViaggiRandomComponent from "./ViaggiRandomComponent"
 const PrenotazioniPersonalizzateComponent = () => {
   return (
-    <Container>
+    <Container fluid>
       <Row>
-        <Col md={12}>
+        <Col xs={12}>
           <PrenotazioneFormComponent />
         </Col>
-        <Col md={12}>
+        <Col xs={12}>
           <ViaggiRandomComponent quantità={8} />
         </Col>
       </Row>

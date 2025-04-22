@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Alert, Spinner } from "react-bootstrap"
 import GiorniViaggioComponent from "./GiorniViaggioComponent"
 import PrenotazioneFormComponent from "./PrenotazioniFormComponent"
 import ViaggiRandomComponent from "./ViaggiRandomComponent"
+import DettagliInclusiComponent from "./DettagliInclusiComponent"
 
 const DettagliViaggioComponent = () => {
   const { id } = useParams()
@@ -60,44 +61,52 @@ const DettagliViaggioComponent = () => {
     <Container className="my-5">
       <Row>
         <Col>
-          <Card className="p-4">
-            <h2>{viaggio.titolo}</h2>
+          <Card className=" bg-white bg-opacity-75 border border-1 border-dark p-0 card-trips-details">
+            <Card.Title className="titleDetailTrip text-center fw-bolder m-0 p-3 ">
+              {viaggio.titolo}
+            </Card.Title>
             {viaggio.immagineCopertina && (
               <Card.Img
                 variant="top"
                 src={viaggio.immagineCopertina}
                 alt={viaggio.titolo}
-                style={{ objectFit: "cover", height: "300px" }}
+                className=" rounded-0 py-4 bg-black"
+                style={{ objectFit: "cover", height: "350px" }}
               />
             )}
-            <p className="mt-3">{viaggio.descrizione}</p>
-            <p>Giorni di viaggio: {viaggio.durataGiorni}</p>
-            <p>
-              Dal: {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT")}{" "}
-              al: {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT")}
-            </p>
-
-            <Card.Text className="fw-bold">
-              Prezzo: Da {viaggio.prezzo} € a persona
-            </Card.Text>
-            <Card.Text className="fw-bold">
-              Tipologia: {viaggio.tipologia}
-            </Card.Text>
+            <div className="my-3 mx-4">
+              <p className=" text-uppercasefirst">{viaggio.descrizione}</p>
+              <p>Giorni di viaggio: {viaggio.durataGiorni}</p>
+              <p>
+                Dal:{" "}
+                {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT")} al:{" "}
+                {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT")}
+              </p>
+              <Card.Text className="fw-bold fs-5 text-danger">
+                Prezzo: Da {viaggio.prezzo} € a persona
+              </Card.Text>
+              <Card.Text className="fw-bold text-end">
+                Tipologia: {viaggio.tipologia}
+              </Card.Text>
+            </div>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={8}>
           <GiorniViaggioComponent viaggioId={id} />
         </Col>
-        <Col>
-          <h2 className="mb-4">Prenota il tuo viaggio con noi</h2>
-          <PrenotazioneFormComponent />
+        <Col xs={4} className=" mt-4">
+          <DettagliInclusiComponent />
         </Col>
       </Row>
       <Row>
-        <Col>
-          <ViaggiRandomComponent quantità={4} />
+        <Col xs={12}>
+          <h2 className="mb-4">Prenota il tuo viaggio con noi</h2>
+          <PrenotazioneFormComponent />
+        </Col>
+        <Col xs={12} className=" d-flex ">
+          <ViaggiRandomComponent quantità={8} />
         </Col>
       </Row>
     </Container>

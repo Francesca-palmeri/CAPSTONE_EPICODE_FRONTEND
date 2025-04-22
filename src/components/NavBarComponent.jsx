@@ -33,11 +33,7 @@ function NavBarComponent() {
         className="d-lg-flex justify-content-between align-items-center"
       >
         <Navbar.Brand as={Link} to="/">
-          <img
-            src="./src/assets/logonav.png"
-            alt="Logo"
-            className="logoNavbar"
-          />
+          <img src="/logonav.png" alt="Logo" className="logoNavbar" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

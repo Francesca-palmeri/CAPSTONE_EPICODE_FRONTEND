@@ -115,7 +115,7 @@ const HomePageComponent = () => {
       </Container>
 
       <div className=" bordo mt-3 d-flex flex-column justify-content-center align-items-center">
-        <h2 class="titleProposte">LE NOSTRE PROPOSTE</h2>
+        <h2 class="titleProposte">🎌LE NOSTRE PROPOSTE🎌</h2>
         <p class="subtitleProposte">
           I nostri itinerari pensati per ogni tipo di viaggiatore.
         </p>

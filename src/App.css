@@ -5,7 +5,7 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Poppins, Inter, sans-serif;
-  background-color: #fff3ea;
+  background-color: #ffeae7;
   font-size: 1.1rem;
 }
 
@@ -13,7 +13,7 @@ body {
 
 .bgNavBar {
   z-index: 10;
-  background-color: #fff0e4;
+  background-color: #ffe2dd;
   color: #06050e;
   padding: 1px 0;
 }
@@ -40,7 +40,7 @@ body {
 .nav-user-dropdown .dropdown-menu {
   border-radius: 12px;
   min-width: 250px;
-  background-color: #fff0e4ea;
+  background-color: #ffe8e4ea;
   border: none;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   animation: dropdownFade 0.3s ease-in-out;
@@ -188,21 +188,12 @@ body {
   background-color: transparent;
 }
 
-.FixedMeasures {
-  /*border: 1px solid #1d3557;**/
-  max-width: 500px;
-  min-height: 460px;
-  box-shadow: rgba(255, 209, 163, 0.591) 0px 2px 4px,
-    rgba(231, 177, 124, 0.591) 0px 7px 13px -3px,
-    rgba(171, 117, 64, 0.741) 0px -3px 0px inset;
-}
-
 .badgeForm {
   position: absolute;
   padding: 8px;
   margin: 5px;
-  top: 0px;
-  right: 0px;
+  top: 8px;
+  right: 12px;
 }
 
 .prenota-cta {
@@ -229,11 +220,11 @@ body {
 }
 
 .prenota-btn {
-  background-color: #fff3ea;
+  background-color: #ffffff;
   border-radius: 10px;
   color: #000000;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.3em;
   font-weight: 700;
   height: 54px;
   width: 250px;
@@ -361,7 +352,7 @@ body {
 }
 
 .RegisterButton:hover {
-  background-color: #9a2326;
+  background-color: rgb(154, 35, 38);
 }
 
 @media screen and (max-width: 992px) {
@@ -420,11 +411,196 @@ body {
   }
 }
 
+/* ViaggiCatalogoComponent*/
+
+.filtriForm .form-select,
+.filtriForm .form-select:focus {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #4f1616;
+  border-radius: 0 0 10% 0;
+  box-shadow: none;
+}
+
+.filtriForm .form-select option,
+.predefinitaOption {
+  color: #da0021;
+}
+
+.catalogoColor {
+  color: #f74523;
+}
+
+.viaggiCards {
+  border: none;
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(69, 69, 69, 0.23) 0px 3px 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.viaggiCards:hover {
+  transform: translateY(-10px);
+  border: 1px solid white;
+  box-shadow: 4px 3px 8px 4px #0e122982;
+}
+
+.viaggiCards .card-img-top {
+  transition: transform 0.3s ease;
+  opacity: 1;
+}
+
+.viaggiCards:hover .card-img-top {
+  transform: scale(1.1);
+  opacity: 0.2;
+}
+
+.viaggiCards .card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  background: linear-gradient(to top, rgba(28, 28, 28, 0.584), transparent);
+  width: 100%;
+  padding: 20px;
+}
+
+.viaggiCards .card-title {
+  font-size: 1.7em;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1400px) {
+  .viaggiCards .card-title {
+    font-size: 1.4em;
+  }
+  .viaggiCards .card-text {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .viaggiCards .card-title {
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .viaggiCards .card-title {
+    font-size: 1.2em;
+  }
+  .viaggiCards .card-text {
+    font-size: 0.8em;
+  }
+}
+
+.viaggiCards .card-title,
+.viaggiCards .card-text {
+  color: #fff;
+  text-shadow: 5px 0px 8px rgb(0, 0, 0);
+}
+
+.viaggiCards .btn {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  padding-left: 0;
+  z-index: 5;
+  transition: color 0.3s ease;
+}
+
+.viaggiCards .btn:hover {
+  color: #c12746;
+  background-color: #ffffff;
+}
+
+.viaggiCards::before {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/*FAQ Component*/
+.faqAccordion .accordion-item {
+  border: 0;
+  border-bottom: 1px solid #000000;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.faqAccordion .accordion-header {
+  background-color: #fff0f0;
+  font-size: 1.2em;
+  color: #b30000;
+}
+
+.faqAccordion .accordion-button {
+  background-color: #fff0f0;
+  color: #b30000;
+  box-shadow: 1px 1px #9c0000;
+}
+
+.faqAccordion .accordion-button:not(.collapsed) {
+  background-color: #ffe5e5;
+  color: #9c0000;
+}
+
+.faqAccordion .accordion-body {
+  background-color: #fff;
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.faqAccordion .accordion-body a {
+  text-decoration: none;
+  color: #b30000 !important;
+  font-weight: bold;
+}
+
+.faqAccordion .accordion-button::after {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.faqAccordion .accordion-button:not(.collapsed)::after {
+  transform: rotate(90deg);
+}
+
+/*Detail viaggi component*/
+
+.card-trips-details {
+  box-shadow: rgba(0, 0, 0, 0.322) 0px 2px 4px 0px,
+    rgba(0, 0, 0, 0.32) 0px 2px 16px 0px;
+  text-align: justify;
+  font-size: 1em;
+  text-justify: inter-word;
+}
+
+.text-uppercasefirst::first-letter {
+  text-transform: uppercase;
+  font-size: 1.5em;
+  color: #9c0000;
+}
+
+.titleDetailTrip {
+  color: #dc3545;
+  font-size: 1.7em;
+  text-transform: capitalize;
+}
+
 /* Footer */
 .footer {
   background: #f9e8c8;
   color: #06050e;
-
   padding: 40px 0;
   font-family: Arial, sans-serif;
 }

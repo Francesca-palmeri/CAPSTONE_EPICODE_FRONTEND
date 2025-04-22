@@ -43,25 +43,31 @@ const SezioneViaggiComponent = () => {
   console.log(viaggiAutonomia, viaggiGruppo)
 
   const renderCarousel = (listaViaggi, coloreBadge, coloreButton) => (
-    <Carousel indicators={false} controls={false} className="my-2">
+    <Carousel
+      indicators={false}
+      controls={false}
+      className="my-2 mx-md-5 mx-lg-2 px-md-5 px-lg-0 "
+    >
       {listaViaggi.map((viaggio) => (
         <Carousel.Item key={viaggio.id}>
-          <Card className=" bg-transparent text-center m-2 FixedMeasures">
+          <Card className=" text-center m-2 viaggiCards text-white text-center h-100 position-relative fw-bolder">
             <div className="position-relative">
               {viaggio.immagineCopertina && (
                 <Card.Img
                   variant="top"
                   src={viaggio.immagineCopertina}
                   alt={viaggio.titolo}
-                  style={{ objectFit: "cover", height: "200px" }}
+                  style={{ objectFit: "cover", height: "380px" }}
                 />
               )}
               <Badge bg={coloreBadge} className=" badgeForm">
                 {viaggio.tipologia.toUpperCase()}
               </Badge>
             </div>
-            <Card.Body className=" d-flex flex-column mx-2 ">
-              <Card.Title className="fs-5 fw-bold">{viaggio.titolo}</Card.Title>
+            <Card.Body className=" d-flex flex-column  ">
+              <Card.Title className=" display-3 fw-bold">
+                {viaggio.titolo}
+              </Card.Title>
               <Card.Text className=" m-2">
                 <p>
                   Dal{" "}
@@ -161,7 +167,7 @@ const SezioneViaggiComponent = () => {
           sm={12}
           className=" d-flex flex-column flex-lg-row justify-content-center "
         >
-          <Col sm={12} lg={4} className="ms-md-4 ps-md-5 ps-4">
+          <Col sm={12} lg={4} className=" ps-md-5 ps-4 mt-lg-5">
             {renderCarousel(viaggiAutonomia, "warning", "warning")}
           </Col>
           <Col sm={12} lg={8}>

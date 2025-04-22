@@ -203,7 +203,7 @@ const RegisterComponent = () => {
             <Button type="submit" className="RegisterButton">
               Registrati
             </Button>
-            <div className=" smalltextLog d-flex justify-content-center ">
+            <div className=" smalltextLog d-flex justify-content-center  ">
               <p>Possiedi un account? </p>
               <Link to={"/LoginPage"} className="redirect-cta ms-1">
                 Vai al login

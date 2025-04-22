@@ -50,23 +50,24 @@ const ViaggiRandomComponent = ({ quantità = 3 }) => {
       <h4 className="mb-4">🌏 Ti consigliamo questi viaggi</h4>
       <Row>
         {viaggiCasuali.map((v) => (
-          <Col md={3} key={v.id} className="mb-4">
-            <Card className="h-100 shadow-sm">
+          <Col md={4} lg={3} key={v.id} className="mb-4">
+            <Card className="viaggiCards text-white text-center h-100 position-relative">
               {v.immagineCopertina && (
                 <Card.Img
                   variant="top"
                   src={v.immagineCopertina}
                   alt={v.titolo}
-                  style={{ objectFit: "cover", height: "200px" }}
+                  style={{ objectFit: "cover", height: "360px" }}
                 />
               )}
               <Card.Body className="d-flex flex-column">
                 <Card.Title>{v.titolo}</Card.Title>
-                <Card.Text>
+                <Card.Text className=" fw-semibold">
                   Dal: {new Date(v.dataPartenza).toLocaleDateString("it-IT")}{" "}
                   al: {new Date(v.dataRitorno).toLocaleDateString("it-IT")}
                 </Card.Text>
-                <Card.Text className="fw-bold">{v.prezzo} €</Card.Text>
+                <Card.Text className="fw-bold">Prezzo: {v.prezzo} €</Card.Text>
+
                 <Button
                   as={Link}
                   to={`/viaggi/${v.id}`}
