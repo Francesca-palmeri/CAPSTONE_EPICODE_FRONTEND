@@ -5,7 +5,7 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Poppins, Inter, sans-serif;
-  background-color: #ffeae7;
+  background-color: #fff5f3;
   font-size: 1.1rem;
 }
 
@@ -597,6 +597,65 @@ body {
   text-transform: capitalize;
 }
 
+/*Contatto Form e page*/
+
+.bg-contattaci-header {
+  background-image: url("https://i.pinimg.com/1200x/a3/2d/71/a32d71b8c67f20e230ef9b407b32ef6f.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.informazioniContatto {
+  text-shadow: 1px 1px 5px black, 0 0 0.5em rgb(14, 6, 36),
+    0 0 0.2em rgb(0, 0, 0);
+}
+
+.colorTextContatti {
+  color: #d58080;
+  text-shadow: 2px 2px 1px #2c1614;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox .checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label .checkbox-custom {
+  background-color: #921b27;
+  border-color: white;
+}
+
+.custom-checkbox
+  input[type="checkbox"]:checked
+  + label
+  .checkbox-custom::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 0px;
+  width: 13px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 4px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox input[type="checkbox"]:disabled + label .checkbox-custom {
+  background-color: transparent;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Footer */
 .footer {
   background: #f9e8c8;
@@ -657,5 +716,5 @@ body {
 /*---BLOG DETAILS CSS */
 .jp {
   font-weight: bold;
-  font-family: "Noto Serif JP", sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }

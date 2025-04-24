@@ -1,5 +1,5 @@
 import { Container, Row, Col, Accordion } from "react-bootstrap"
-import { PatchQuestion, PatchQuestionFill } from "react-bootstrap-icons"
+import { PatchQuestionFill } from "react-bootstrap-icons"
 import { Link } from "react-router-dom"
 
 const FaqComponent = () => {
@@ -111,10 +111,13 @@ const FaqComponent = () => {
             <br />
             Non preoccupatevi: se non siete interessati ai viaggi in catalogo,
             potete selezionarne uno qualsiasi e inserire tutte le vostre
-            richieste nell'apposita area. Verrete ricontattati dal nostro team
-            per organizzare il vostro viaggio in base alle vostre esigenze,
-            oppure contattandoci tramite il nostro indirizzo email{" "}
-            <span className=" fw-bold">tadaimanihon@travelblog.it</span>.
+            richieste nell'apposita area oppure mandandoci una richiesta di
+            contatto tramite il form nella pagina{" "}
+            <Link to="/Contatti" className="text-primary">
+              Contatti
+            </Link>
+            . Il nostro team sarà pronto ad aiutarvi nella scelta e
+            nell'organizzazione del vostro viaggio in base alle vostre esigenze.
           </p>
         </>
       ),
@@ -145,21 +148,13 @@ const FaqComponent = () => {
       domanda: "Come posso contattarvi?",
       risposta: (
         <p>
-          Potete compilare il modulo che trovate in questa pagina{" "}
-          <Link to="/PrenotazioniPersonalizzate" className="text-primary">
-            Viaggi Personalizzati
-          </Link>{" "}
-          , nel caso foste interessati ad organizzare un viaggio, oppure per
-          ulteriori informazioni e chiarimenti potete scriverci direttamente via
-          email o contattarci tramite telefono.
-          <br />
-          Nella sezione{" "}
-          <Link to="/ContattiPage" className="text-primary">
+          Utilizzando il form che trovate nella pagina{" "}
+          <Link to="/Contatti" className="text-primary">
             {" "}
             CONTATTI{" "}
           </Link>{" "}
-          troverete tutte le informazioni utili e anche i nostri orari di
-          ufficio.
+          riempiendo tutti i campi del modulo, oppure tramite email diretta o
+          numero di telefono.
         </p>
       ),
     },

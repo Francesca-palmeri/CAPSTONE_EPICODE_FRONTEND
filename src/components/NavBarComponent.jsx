@@ -57,7 +57,7 @@ function NavBarComponent() {
               <Nav.Link as={Link} to="/BlogPage" className="HoverNavLink">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/ContattiPage" className="HoverNavLink">
+              <Nav.Link as={Link} to="/Contatti" className="HoverNavLink">
                 Contatti
               </Nav.Link>
               <Nav.Link as={Link} to="/FAQ" className="HoverNavLink">

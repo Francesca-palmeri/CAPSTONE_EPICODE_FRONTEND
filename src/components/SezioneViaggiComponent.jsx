@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom"
 import {
   Airplane,
+  ArrowRight,
   CalendarDay,
   EmojiLaughing,
   Headset,
@@ -82,7 +83,7 @@ const SezioneViaggiComponent = () => {
                 to={`/viaggi/${viaggio.id}`}
                 className={`btn btn-${coloreButton} mt-auto`}
               >
-                Scopri di più
+                Scopri di più <ArrowRight />
               </Link>
             </Card.Body>
           </Card>

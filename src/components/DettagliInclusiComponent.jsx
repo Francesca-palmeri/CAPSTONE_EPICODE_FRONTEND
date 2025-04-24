@@ -14,10 +14,7 @@ const DettagliInclusiComponent = () => {
         </li>
         <li>
           <CheckCircle className="text-success me-2" /> Sistemazione in camere
-          condivise durante tutto il viaggio
-        </li>
-        <li>
-          <CheckCircle className="text-success me-2" /> Cena di benvenuto
+          condivise durante tutto il viaggio (si applica ai viaggi di gruppo)
         </li>
         <li>
           <CheckCircle className="text-success me-2" /> 7 giorni Shinkansen
@@ -29,7 +26,7 @@ const DettagliInclusiComponent = () => {
         </li>
       </ul>
 
-      <h5 className="fw-bold mt-4">Non incluso</h5>
+      <h5 className="fw-bold ">Non incluso</h5>
       <ul className="list-unstyled ms-2">
         <li>
           <XCircle className="text-danger me-2" /> Biglietto aereo
@@ -57,7 +54,7 @@ const DettagliInclusiComponent = () => {
         </li>
       </ul>
 
-      <h5 className="fw-bold mt-4">Altre informazioni</h5>
+      <h5 className="fw-bold ">Altre informazioni</h5>
       <p className="ms-2">
         <InfoCircle className=" text-primary me-1" />
         <strong>Prezzo per persona</strong> <br />

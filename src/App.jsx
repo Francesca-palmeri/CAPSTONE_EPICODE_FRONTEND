@@ -17,6 +17,8 @@ import FaqComponent from "./components/FaqComponent"
 import FrasiUtiliComponent from "./components/FrasiUtiliComponent"
 import PrenotazioniPersonalizzateComponent from "./components/PrenotazioniPersonalizzate"
 import ErrorComponent from "./components/ErrorComponent"
+import ContattiPage from "./components/ContattiPage"
+import PrivacyPolicyComponent from "./components/PrivacyPolicyComponent"
 
 const App = () => (
   <BrowserRouter>
@@ -36,9 +38,10 @@ const App = () => (
       <Route path="/Profilo" element={<ProfiloComponent />} />
       <Route path="/BlogPage" element={<BlogPageComponent />} />
       <Route path="/blog/:postId" element={<BlogDettaglioComponent />} />
-      <Route path="ContattiPage" />
+      <Route path="Contatti" element={<ContattiPage />} />
       <Route path="/FAQ" element={<FaqComponent />} />
       <Route path="/frasi-utili" element={<FrasiUtiliComponent />} />
+      <Route path="/privacy" element={<PrivacyPolicyComponent />} />
       <Route path="*" element={<ErrorComponent />} />
     </Routes>
     <FooterComponent />

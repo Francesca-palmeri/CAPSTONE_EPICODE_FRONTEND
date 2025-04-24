@@ -85,7 +85,10 @@ const PrenotazioniComponent = () => {
 
   return (
     <Container className="my-5">
-      <h2 className="mb-4">Prenotazioni</h2>
+      <div className=" d-flex justify-content-between align-items-center">
+        <h2 className="mb-4">Prenotazioni</h2>
+        {isAdmin && <p className="badge bg-danger fs-5 text-white">Admin</p>}
+      </div>
 
       {Array.isArray(lista) && lista.length > 0 ? (
         <ListGroup>
@@ -95,9 +98,6 @@ const PrenotazioniComponent = () => {
                 <Col>
                   <h5>
                     {p.nomeUtente} {p.cognomeUtente}{" "}
-                    {isAdmin && (
-                      <span className="badge bg-warning text-dark">Admin</span>
-                    )}
                   </h5>
                   <p>
                     <strong>Viaggio:</strong> {p.titoloViaggio} <br />

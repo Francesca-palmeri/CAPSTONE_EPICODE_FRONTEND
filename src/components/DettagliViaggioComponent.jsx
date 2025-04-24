@@ -1,10 +1,20 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Container, Row, Col, Card, Alert, Spinner } from "react-bootstrap"
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Alert,
+  Spinner,
+  Button,
+} from "react-bootstrap"
 import GiorniViaggioComponent from "./GiorniViaggioComponent"
 import PrenotazioneFormComponent from "./PrenotazioniFormComponent"
 import ViaggiRandomComponent from "./ViaggiRandomComponent"
 import DettagliInclusiComponent from "./DettagliInclusiComponent"
+import { ArrowBarLeft } from "react-bootstrap-icons"
+import { Link } from "react-router-dom"
 
 const DettagliViaggioComponent = () => {
   const { id } = useParams()
@@ -93,14 +103,21 @@ const DettagliViaggioComponent = () => {
         </Col>
       </Row>
       <Row>
-        <Col xs={8}>
+        <Col xs={12} md={8} className="p-0">
           <GiorniViaggioComponent viaggioId={id} />
+          <Button
+            as={Link}
+            to="/Viaggi"
+            className=" text-decoration-none RegisterButton m-3 "
+          >
+            <ArrowBarLeft className=" mb-1" /> Torna al catalogo
+          </Button>
         </Col>
-        <Col xs={4} className=" mt-4">
+        <Col xs={12} md={4} className=" mt-4">
           <DettagliInclusiComponent />
         </Col>
       </Row>
-      <Row>
+      <Row className=" mt-4">
         <Col xs={12}>
           <h2 className="mb-4">Prenota il tuo viaggio con noi</h2>
           <PrenotazioneFormComponent />

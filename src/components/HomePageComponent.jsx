@@ -25,10 +25,7 @@ const HomePageComponent = () => {
             <Link to="/Viaggi" className="btn btn-outline-light me-3">
               Scopri di più
             </Link>
-            <Link
-              to="/PrenotazioniPersonalizzate"
-              className="btn btn-outline-light"
-            >
+            <Link to="/ViaggiPersonalizzati" className="btn btn-outline-light">
               Personalizza il tuo viaggio
             </Link>
           </div>
