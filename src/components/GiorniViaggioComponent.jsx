@@ -33,7 +33,7 @@ const GiorniViaggioComponent = ({ viaggioId }) => {
 
   return (
     <Container className="mt-4 mb-3">
-      <p className=" fs-2  text-start mb-0">Programma: 🗓️</p>
+      <p className=" fs-2  text-start mb-1">Programma: 🗓️</p>
       <ListGroup className=" border border-1 border-danger text bg-opacity-75">
         {giorni.map((giorno) => (
           <ListGroup.Item key={giorno.id}>

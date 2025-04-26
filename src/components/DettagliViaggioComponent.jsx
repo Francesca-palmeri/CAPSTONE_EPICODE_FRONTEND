@@ -15,6 +15,7 @@ import ViaggiRandomComponent from "./ViaggiRandomComponent"
 import DettagliInclusiComponent from "./DettagliInclusiComponent"
 import { ArrowBarLeft } from "react-bootstrap-icons"
 import { Link } from "react-router-dom"
+import { Pencil } from "react-bootstrap-icons"
 
 const DettagliViaggioComponent = () => {
   const { id } = useParams()
@@ -71,10 +72,17 @@ const DettagliViaggioComponent = () => {
     <Container className="my-5">
       <Row>
         <Col>
+          <Button
+            as={Link}
+            to="/Viaggi"
+            className=" text-decoration-none RegisterButton m-3 "
+          >
+            <ArrowBarLeft className=" mb-1" /> Torna al catalogo
+          </Button>
+          <p className="titleDetailTrip text-center fw-bolder m-0 p-3 ">
+            {viaggio.titolo}
+          </p>
           <Card className=" bg-white bg-opacity-75 border border-1 border-dark p-0 card-trips-details">
-            <Card.Title className="titleDetailTrip text-center fw-bolder m-0 p-3 ">
-              {viaggio.titolo}
-            </Card.Title>
             {viaggio.immagineCopertina && (
               <Card.Img
                 variant="top"
@@ -103,23 +111,22 @@ const DettagliViaggioComponent = () => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} md={8} className="p-0">
+        <Col xs={12} lg={8} className="p-0 d-flex flex-column">
           <GiorniViaggioComponent viaggioId={id} />
-          <Button
-            as={Link}
-            to="/Viaggi"
-            className=" text-decoration-none RegisterButton m-3 "
-          >
-            <ArrowBarLeft className=" mb-1" /> Torna al catalogo
-          </Button>
         </Col>
-        <Col xs={12} md={4} className=" mt-4">
+        <Col xs={12} lg={4} className=" mt-4">
           <DettagliInclusiComponent />
         </Col>
       </Row>
       <Row className=" mt-4">
         <Col xs={12}>
-          <h2 className="mb-4">Prenota il tuo viaggio con noi</h2>
+          <h2 className=" text-center titleSlogan">
+            Richiedi il tuo preventivo{" "}
+            <span>
+              {" "}
+              <Pencil />
+            </span>{" "}
+          </h2>
           <PrenotazioneFormComponent />
         </Col>
         <Col xs={12} className=" d-flex ">

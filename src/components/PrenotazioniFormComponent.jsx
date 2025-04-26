@@ -8,6 +8,7 @@ import { GetViaggi } from "../redux/actions/viaggiActions"
 import { Form, Button, Container, Alert, Spinner, Modal } from "react-bootstrap"
 import jsPDF from "jspdf"
 import { Link } from "react-router-dom"
+import "./Styles/PrenotazioniStyles.css"
 
 const PrenotazioneFormComponent = () => {
   const dispatch = useDispatch()
@@ -95,7 +96,7 @@ const PrenotazioneFormComponent = () => {
     }
 
     await dispatch(EffettuaPrenotazione(payload))
-    dispatch(GetPrenotazioniUtente(utenteId)) // 🔁 aggiorna la lista
+    dispatch(GetPrenotazioniUtente(utenteId))
 
     const titoloViaggio =
       viaggi.find((v) => v.id === parseInt(formData.viaggioId))?.titolo ||
@@ -121,13 +122,13 @@ const PrenotazioneFormComponent = () => {
       viaggioId: "",
       dataPrenotazione: new Date().toISOString().split("T")[0],
       numeroPartecipanti: 1,
-      tipologia: "personalizzato",
+      tipologia: "Personalizzato",
       note: "",
     })
   }
   if (isAuthenticated) {
     return (
-      <Container className="my-5">
+      <Container className="my-5 prenotazione-form-container">
         <h3 className="mb-4">Effettua una prenotazione</h3>
         <p>
           Seleziona il viaggio che più ti interessa e se hai rischieste
@@ -265,11 +266,11 @@ const PrenotazioneFormComponent = () => {
     )
   } else {
     return (
-      <Container className="my-5 text-center">
+      <Container className="my-5 text-center text-uppercase">
         <Alert variant="warning">
           Devi avere effettuato l'accesso per consultare questa pagina.
         </Alert>
-        <Button variant="primary" as={Link} to="/LoginPage">
+        <Button variant="danger" as={Link} to="/LoginPage">
           Vai al Login
         </Button>
       </Container>

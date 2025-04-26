@@ -1,0 +1,46 @@
+.profilo-card {
+  background: linear-gradient(to top, #fff6f6, #ffe9e7);
+  border: none;
+  border-radius: 20px;
+}
+
+.profilo-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c12746;
+  box-shadow: 0 0 10px rgba(193, 39, 70, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.profilo-avatar:hover {
+  transform: scale(1.05);
+}
+
+.profilo-nome {
+  font-size: 2rem;
+  color: #c12746;
+}
+
+.prenotazione-card {
+  background-color: #fff;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  padding: 10px 10px;
+}
+
+.prenotazione-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.prenotazione-card .card-title {
+  color: #c12746;
+  font-weight: bold;
+}
+
+.prenotazione-card p {
+  font-size: 0.95rem;
+  color: #495057;
+}

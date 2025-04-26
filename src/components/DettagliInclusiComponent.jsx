@@ -3,7 +3,7 @@ import { CheckCircle, InfoCircle, XCircle } from "react-bootstrap-icons"
 
 const DettagliInclusiComponent = () => {
   return (
-    <Card className=" border-dark p-3 mt-5 bg-danger bg-opacity-10">
+    <Card className=" border-dark p-3 mt-lg-5 bg-danger-subtle ">
       <h4 className="fw-bold mb-3">Scheda Informativa</h4>
 
       <h5 className="fw-bold">Incluso</h5>

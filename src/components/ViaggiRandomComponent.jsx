@@ -57,7 +57,7 @@ const ViaggiRandomComponent = ({ quantità = 3 }) => {
                   variant="top"
                   src={v.immagineCopertina}
                   alt={v.titolo}
-                  style={{ objectFit: "cover", height: "360px" }}
+                  style={{ objectFit: "cover", height: "300px" }}
                 />
               )}
               <Card.Body className="d-flex flex-column">
@@ -66,7 +66,9 @@ const ViaggiRandomComponent = ({ quantità = 3 }) => {
                   Dal: {new Date(v.dataPartenza).toLocaleDateString("it-IT")}{" "}
                   al: {new Date(v.dataRitorno).toLocaleDateString("it-IT")}
                 </Card.Text>
-                <Card.Text className="fw-bold">Prezzo: {v.prezzo} €</Card.Text>
+                <Card.Text className="fw-bold fs-5">
+                  Prezzo: {v.prezzo} €
+                </Card.Text>
 
                 <Button
                   as={Link}

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getFrasiUtili } from "../redux/actions/frasiActions"
-import { Container, Spinner, Alert, Accordion } from "react-bootstrap"
+import { Container, Spinner, Alert, Row, Col, Card } from "react-bootstrap"
+import { Translate, Book, Globe } from "react-bootstrap-icons"
+import "./Styles/FrasiUtiliStyle.css"
 
 const FrasiUtiliComponent = () => {
   const dispatch = useDispatch()
   const { lista, loading, error } = useSelector((state) => state.frasi)
   const [categoriaSelezionata, setCategoriaSelezionata] = useState("Tutte")
-
-  console.log(lista)
 
   useEffect(() => {
     dispatch(getFrasiUtili())
@@ -23,21 +23,18 @@ const FrasiUtiliComponent = () => {
 
   return (
     <Container className="my-5">
-      <h2 className="text-center mb-4">
+      <h2 className="text-center mb-3 intro-title text-danger">
         🗣️ Frasi giapponesi utili per viaggiare
       </h2>
-      <p className="text-center text-muted mb-4">
-        Un piccolo frasario per aiutarti durante il tuo viaggio in Giappone!
+      <p className="text-center text-muted mb-4 fs-5">
+        Scopri le frasi più utili da usare durante il tuo viaggio!
       </p>
 
-      <div className="mb-4 text-center">
+      <div className="mb-5 text-center">
         <span
-          className={`badge rounded-pill me-2 px-3 py-2 ${
-            categoriaSelezionata === "Tutte"
-              ? "bg-primary"
-              : "bg-light text-dark border"
+          className={`badge-categoria ${
+            categoriaSelezionata === "Tutte" ? "active" : ""
           }`}
-          style={{ cursor: "pointer" }}
           onClick={() => setCategoriaSelezionata("Tutte")}
         >
           Tutte
@@ -46,12 +43,9 @@ const FrasiUtiliComponent = () => {
         {categorie.map((cat, index) => (
           <span
             key={index}
-            className={`badge rounded-pill me-2 px-3 py-2 ${
-              categoriaSelezionata === cat
-                ? "bg-primary"
-                : "bg-light text-dark border"
+            className={`badge-categoria ${
+              categoriaSelezionata === cat ? "active" : ""
             }`}
-            style={{ cursor: "pointer" }}
             onClick={() => setCategoriaSelezionata(cat)}
           >
             {cat}
@@ -59,32 +53,42 @@ const FrasiUtiliComponent = () => {
         ))}
       </div>
 
-      {loading && <Spinner animation="border" />}
-      {error && <Alert variant="danger">Errore: {error}</Alert>}
+      {loading && (
+        <div className="text-center my-5">
+          <Spinner animation="border" variant="danger" />
+          <p className="text-muted mt-3">Caricamento frasi in corso...</p>
+        </div>
+      )}
+      {error && (
+        <div className="text-center my-5">
+          <Alert variant="danger">{error}</Alert>
+        </div>
+      )}
 
-      <Accordion alwaysOpen>
+      <Row className="g-4">
         {frasiFiltrate.map((frase) => (
-          <Accordion.Item eventKey={frase.id.toString()} key={frase.id}>
-            <Accordion.Header>
-              <p className=" mx-2 my-2 ">{frase.giapponeseKana}</p>
-            </Accordion.Header>
-            <Accordion.Body className="">
-              <p>
-                <strong>Giapponese (kana):</strong> {frase.giapponeseKana}
-              </p>
-              <p>
-                <strong>Romaji:</strong> {frase.romaji}
-              </p>
-
-              <p>
-                <strong>Traduzione: </strong>
-                {frase.italiano}
-              </p>
-              <p>{frase.categoria}</p>
-            </Accordion.Body>
-          </Accordion.Item>
+          <Col xs={12} md={6} key={frase.id}>
+            <Card className="frasi-card shadow-sm h-100">
+              <Card.Body>
+                <h5 className="text-danger mb-3 text-center">
+                  {frase.giapponeseKana}
+                </h5>
+                <p>
+                  <Book className="me-2 text-danger" />
+                  <strong>Romaji:</strong> {frase.romaji}
+                </p>
+                <p>
+                  <Translate className="me-2 text-primary" />
+                  <strong>Traduzione:</strong> {frase.italiano}
+                </p>
+                <p className="fst-italic text-muted text-end mb-0">
+                  {frase.categoria}
+                </p>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </Accordion>
+      </Row>
     </Container>
   )
 }

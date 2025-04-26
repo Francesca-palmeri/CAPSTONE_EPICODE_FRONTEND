@@ -94,7 +94,7 @@ const ContattoForm = () => {
           <FormControl
             className="w-75 text-center"
             type="text"
-            placeholder="es. Mario Rossi"
+            placeholder="e. Mario Rossi"
             name="nome"
             value={form.nome}
             onChange={handleChange}

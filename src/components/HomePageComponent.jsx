@@ -13,7 +13,6 @@ import { Link } from "react-router-dom"
 const HomePageComponent = () => {
   return (
     <>
-      {/* Hero Section */}
       <div className="hero-section text-white text-center d-flex align-items-center justify-content-center">
         <div className="overlay"></div>
 
@@ -21,11 +20,17 @@ const HomePageComponent = () => {
           <h1 className="VerticalJP">ただいま日本！</h1>
           <h2 className="display-3 fw-bold">Esplora il Giappone con noi</h2>
           <p className="lead">Viaggi su misura per ogni spirito</p>
-          <div className="mt-4">
-            <Link to="/Viaggi" className="btn btn-outline-light me-3">
+          <div className="mt-4 buttonsHero">
+            <Link
+              to="/Viaggi"
+              className="btn btn-outline-light fw-semibold me-3"
+            >
               Scopri di più
             </Link>
-            <Link to="/ViaggiPersonalizzati" className="btn btn-outline-light">
+            <Link
+              to="/ViaggiPersonalizzati"
+              className="btn btn-outline-light fw-semibold"
+            >
               Personalizza il tuo viaggio
             </Link>
           </div>

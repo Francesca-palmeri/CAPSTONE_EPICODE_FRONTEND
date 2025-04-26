@@ -9,15 +9,28 @@ import {
 import { GetViaggi } from "../redux/actions/viaggiActions"
 import {
   Container,
-  ListGroup,
-  Spinner,
-  Alert,
-  Button,
   Row,
   Col,
-  Form,
+  Card,
+  Button,
+  Spinner,
+  Alert,
   Modal,
+  Form,
+  Toast,
+  ToastContainer,
 } from "react-bootstrap"
+import {
+  PeopleFill,
+  CalendarDateFill,
+  PencilFill,
+  TrashFill,
+  JournalBookmarkFill,
+  GlobeAsiaAustralia,
+  Crosshair2,
+  BookmarkStarFill,
+} from "react-bootstrap-icons"
+import "./Styles/PrenotazioniStyles.css"
 
 const PrenotazioniComponent = () => {
   const dispatch = useDispatch()
@@ -37,6 +50,7 @@ const PrenotazioniComponent = () => {
 
   const [showEditModal, setShowEditModal] = useState(false)
   const [prenotazioneDaModificare, setPrenotazioneDaModificare] = useState(null)
+  const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     if (!user) return
@@ -47,11 +61,12 @@ const PrenotazioniComponent = () => {
   }, [dispatch, user, isAdmin, utenteId])
 
   const handleDelete = (id) => {
-    if (window.confirm("Vuoi davvero eliminare questa prenotazione?")) {
+    if (window.confirm("Sei sicuro di voler eliminare questa prenotazione?")) {
       dispatch(DeletePrenotazione(id)).then(() => {
         isAdmin
           ? dispatch(GetTutteLePrenotazioni())
           : dispatch(GetPrenotazioniUtente(utenteId))
+        setShowToast(true)
       })
     }
   }
@@ -63,13 +78,14 @@ const PrenotazioniComponent = () => {
         ? dispatch(GetTutteLePrenotazioni())
         : dispatch(GetPrenotazioniUtente(utenteId))
       setShowEditModal(false)
+      setShowToast(true)
     })
   }
 
   if (loading) {
     return (
       <Container className="text-center my-5">
-        <Spinner animation="border" />
+        <Spinner animation="border" variant="danger" />
         <p>Caricamento prenotazioni...</p>
       </Container>
     )
@@ -85,67 +101,83 @@ const PrenotazioniComponent = () => {
 
   return (
     <Container className="my-5">
-      <div className=" d-flex justify-content-between align-items-center">
-        <h2 className="mb-4">Prenotazioni</h2>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="text-danger">
+          <JournalBookmarkFill className="me-2" />
+          Tutte le prenotazioni
+        </h2>
         {isAdmin && <p className="badge bg-danger fs-5 text-white">Admin</p>}
       </div>
 
       {Array.isArray(lista) && lista.length > 0 ? (
-        <ListGroup>
+        <Row className="g-4">
           {lista.map((p) => (
-            <ListGroup.Item key={p.id}>
-              <Row>
-                <Col>
-                  <h5>
-                    {p.nomeUtente} {p.cognomeUtente}{" "}
-                  </h5>
-                  <p>
-                    <strong>Viaggio:</strong> {p.titoloViaggio} <br />
-                    <strong>Data prenotazione:</strong>{" "}
-                    {new Date(p.dataPrenotazione).toLocaleDateString("it-IT")}{" "}
-                    <br />
-                    <strong>Partecipanti:</strong> {p.numeroPartecipanti} <br />
-                    <strong>Tipologia:</strong> {p.tipologia} <br />
+            <Col xs={12} md={6} lg={4} key={p.id}>
+              <Card className="prenotazione-card h-100 shadow-sm border border-danger-subtle d-flex flex-column">
+                <Card.Body className="d-flex flex-column">
+                  <div className="mb-4">
+                    <Card.Title className="text-danger mb-4">
+                      {p.nomeUtente} {p.cognomeUtente}
+                    </Card.Title>
+
+                    <p className="mb-2">
+                      <CalendarDateFill className="me-2 icons-color" />
+                      <strong>Data:</strong>{" "}
+                      {new Date(p.dataPrenotazione).toLocaleDateString("it-IT")}
+                    </p>
+                    <p className="mb-2">
+                      <PeopleFill className="me-2 icons-color" />
+                      <strong>Partecipanti:</strong> {p.numeroPartecipanti}
+                    </p>
+                    <p className="mb-2">
+                      <GlobeAsiaAustralia className="icons-color" />{" "}
+                      <strong>Viaggio:</strong> {p.titoloViaggio}
+                    </p>
+                    <p className="mb-2">
+                      <Crosshair2 className="icons-color" />{" "}
+                      <strong>Tipologia:</strong> {p.tipologia}
+                    </p>
                     {p.note && (
-                      <>
+                      <p className="mb-0">
+                        {" "}
+                        <BookmarkStarFill className=" text-danger fs-5" />{" "}
                         <strong>Note:</strong> {p.note}
-                      </>
+                      </p>
                     )}
-                  </p>
-                </Col>
-                {isAdmin && (
-                  <Col
-                    xs="auto"
-                    className="d-flex flex-column justify-content-center align-items-end"
-                  >
-                    <Button
-                      variant="outline-primary"
-                      size="sm"
-                      className="mb-2"
-                      onClick={() => {
-                        setPrenotazioneDaModificare(p)
-                        setShowEditModal(true)
-                      }}
-                    >
-                      Modifica
-                    </Button>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={() => handleDelete(p.id)}
-                    >
-                      Elimina
-                    </Button>
-                  </Col>
-                )}
-              </Row>
-            </ListGroup.Item>
+                  </div>
+                  {isAdmin && (
+                    <div className="mt-auto d-flex justify-content-between align-items-center">
+                      <Button
+                        className="btn-modifica"
+                        size="sm"
+                        onClick={() => {
+                          setPrenotazioneDaModificare(p)
+                          setShowEditModal(true)
+                        }}
+                      >
+                        <PencilFill className="me-2" /> Modifica
+                      </Button>
+
+                      <Button
+                        className="btn-elimina"
+                        size="sm"
+                        onClick={() => handleDelete(p.id)}
+                      >
+                        <TrashFill />
+                        <span className="btn-text">Elimina</span>
+                      </Button>
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </ListGroup>
+        </Row>
       ) : (
         <p>Nessuna prenotazione trovata.</p>
       )}
 
+      {/* Modal Modifica Prenotazione */}
       <Modal
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
@@ -158,7 +190,7 @@ const PrenotazioniComponent = () => {
           {prenotazioneDaModificare && (
             <Form onSubmit={handleUpdateSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label>Data prenotazione</Form.Label>
+                <Form.Label>Data Prenotazione</Form.Label>
                 <Form.Control
                   type="date"
                   value={
@@ -195,7 +227,7 @@ const PrenotazioniComponent = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Numero partecipanti</Form.Label>
+                <Form.Label>Numero Partecipanti</Form.Label>
                 <Form.Control
                   type="number"
                   value={prenotazioneDaModificare.numeroPartecipanti}
@@ -223,7 +255,7 @@ const PrenotazioniComponent = () => {
                 >
                   <option value="gruppo">Viaggio di gruppo</option>
                   <option value="autonomia">Viaggio in autonomia</option>
-                  <option value="personalizzato">Personalizzato</option>
+                  <option value="personalizzato">Viaggio personalizzato</option>
                 </Form.Select>
               </Form.Group>
 
@@ -242,13 +274,33 @@ const PrenotazioniComponent = () => {
                 />
               </Form.Group>
 
-              <Button type="submit" variant="primary">
-                Salva modifiche
-              </Button>
+              <div className="text-end">
+                <Button variant="outline-danger" type="submit">
+                  Salva Modifiche
+                </Button>
+              </div>
             </Form>
           )}
         </Modal.Body>
       </Modal>
+
+      {/* Toast Successo */}
+      <ToastContainer position="top-end" className="p-3">
+        <Toast
+          bg="success"
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="me-auto">Successo</strong>
+          </Toast.Header>
+          <Toast.Body className="text-white">
+            Operazione completata con successo!
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </Container>
   )
 }

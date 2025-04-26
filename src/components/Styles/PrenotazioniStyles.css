@@ -1,0 +1,182 @@
+/*PRENOTAZIONI FORM COMPONENT*/
+
+.prenotazione-form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.prenotazione-form-container h3 {
+  font-weight: bold;
+  color: #b30000;
+}
+
+.prenotazione-form-container p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.prenotazione-form-container .form-label {
+  font-weight: 600;
+  color: #b30000;
+}
+
+.prenotazione-form-container .form-control,
+.prenotazione-form-container .form-select {
+  border-radius: 0.75rem;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.prenotazione-form-container .form-control:focus,
+.prenotazione-form-container .form-select:focus {
+  border-color: #b30000;
+  box-shadow: 0 0 0 0.2rem rgba(179, 0, 0, 0.25);
+}
+
+.prenotazione-form-container .btn-primary {
+  background-color: #b30000;
+  border-color: #b30000;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+}
+
+.prenotazione-form-container .btn-primary:hover {
+  background-color: #a00000;
+  border-color: #a00000;
+}
+
+/*PRENOTAZIONI COMPONENT*/
+
+.prenotazione-card {
+  background-color: #fff;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.prenotazione-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c12746;
+}
+
+.prenotazione-card .card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #c12746;
+  text-align: center;
+}
+
+.prenotazione-card p {
+  font-size: 1.2rem;
+  color: #18232e;
+}
+
+.icons-color {
+  color: #ecbe69;
+  font-size: large;
+}
+
+.btn-modifica {
+  background-color: #ffe9e7;
+  color: #c12746;
+  height: 30px;
+  border: 1px solid #c12746;
+  transition: all 0.3s ease;
+}
+
+.btn-modifica:hover {
+  background-color: #c12746;
+  color: #ffffff;
+  border-color: #c12746;
+  transform: translateY(-2px);
+}
+.btn-elimina {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 30px;
+  background-color: transparent;
+  color: #999999;
+  border: 1px solid #a0a0a0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.btn-elimina .btn-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, width 0.4s ease;
+  display: inline-block;
+}
+
+.btn-elimina:hover {
+  width: 120px; /* Si allarga */
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-elimina:hover .btn-text {
+  opacity: 1;
+  width: auto;
+  margin-left: 8px;
+}
+
+/* Modal fade-in */
+.modal-content {
+  animation: fadeInModal 0.5s ease;
+  border-radius: 15px;
+  background: linear-gradient(to top, #fff6f6, #ffe9e7);
+  border: 1px solid #c12746;
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Modal */
+.modal-header {
+  border-bottom: none;
+  background-color: #ffe9e7;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.modal-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #c12746;
+}
+
+/* Corpo del Modal */
+.modal-body {
+  background-color: #fff;
+  padding: 1.5rem;
+}
+
+/* Bottoni nel Modal */
+.modal-footer .btn-primary {
+  background-color: #c12746;
+  border-color: #c12746;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #a91c36;
+  border-color: #a91c36;
+}
