@@ -66,19 +66,18 @@ const SezioneViaggiComponent = () => {
               </Badge>
             </div>
             <Card.Body className=" d-flex flex-column  ">
-              <Card.Title className=" display-3 fw-bold">
+              <Card.Title className=" display-2 fw-bold">
                 {viaggio.titolo}
               </Card.Title>
-              <Card.Text className=" m-2">
-                <p>
-                  Dal{" "}
-                  {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT")} –{" "}
-                  al {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT")}
-                </p>
-
-                <p>Durata: {viaggio.durataGiorni} giorni</p>
-                <p className=" fw-semibold">Prezzo: €{viaggio.prezzo}</p>
+              <Card.Text>
+                Dal {new Date(viaggio.dataPartenza).toLocaleDateString("it-IT")}{" "}
+                – al {new Date(viaggio.dataRitorno).toLocaleDateString("it-IT")}
               </Card.Text>
+              <Card.Text> Durata: {viaggio.durataGiorni} giorni</Card.Text>
+              <Card.Text className=" fw-semibold">
+                Prezzo: €{viaggio.prezzo}
+              </Card.Text>
+
               <Link
                 to={`/viaggi/${viaggio.id}`}
                 className={`btn btn-${coloreButton} mt-auto`}

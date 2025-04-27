@@ -1,0 +1,7 @@
+.card-commento {
+  background-color: #ffffff;
+  border: 1px solid #ffb2b2;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(160, 123, 123, 0.05);
+}

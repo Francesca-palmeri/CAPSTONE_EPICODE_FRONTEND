@@ -19,9 +19,7 @@ body #root {
 /* NavBar */
 
 .bgNavBar {
-  z-index: 10;
   background-color: #ffe2dd;
-  color: #06050e;
   padding: 1px 0;
 }
 
@@ -81,10 +79,6 @@ body #root {
     left: 100% !important;
     transform: translateX(-100%) !important;
   }
-}
-
-.HoverNavLink:hover {
-  color: #860a10;
 }
 
 .marginLoginNav {
@@ -646,10 +640,11 @@ body #root {
 /*Detail viaggi component*/
 
 .card-trips-details {
-  box-shadow: rgba(0, 0, 0, 0.322) 0px 2px 4px 0px,
-    rgba(0, 0, 0, 0.32) 0px 2px 16px 0px;
+  box-shadow: rgba(0, 0, 0, 0.232) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.32) 0px 1px 16px 0px;
   text-align: justify;
   font-size: 1em;
+
   text-justify: inter-word;
 }
 
@@ -745,25 +740,19 @@ body #root {
 
 /* Footer */
 .footer {
-  background: #f9e8c8;
+  background: #ffedeac9;
   color: #06050e;
   padding: 40px 0;
-  font-family: Arial, sans-serif;
 }
 
 .footer-container {
   display: flex;
   justify-content: space-around;
-  max-width: 1200px;
   margin: 50px auto;
   flex-wrap: wrap;
 }
-
 .footer-section {
-  flex: 1;
   padding: 0 20px;
-  min-width: 250px;
-  margin-bottom: 20px;
 }
 
 .footer-section h2 {
@@ -791,16 +780,29 @@ body #root {
   color: #d71b24;
 }
 
+.footer-section.contact p,
+.footer-section p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.footer-disclaimer {
+  background: #ffe2dd;
+  color: #5a3c3c;
+  font-size: 12px;
+  padding: 15px 10px;
+  margin-top: 20px;
+}
+
 .footer-bottom {
   background: #860a10;
   color: white;
   text-align: center;
   padding: 10px 0;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 0;
 }
 
-/*---BLOG DETAILS CSS */
 .jp {
   font-weight: bold;
   font-family: "Noto Sans JP", sans-serif;

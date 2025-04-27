@@ -117,14 +117,14 @@ const HomePageComponent = () => {
       </Container>
 
       <div className=" bordo mt-3 d-flex flex-column justify-content-center align-items-center">
-        <h2 class="titleProposte">🎌LE NOSTRE PROPOSTE🎌</h2>
-        <p class="subtitleProposte">
+        <h2 className="titleProposte">🎌LE NOSTRE PROPOSTE🎌</h2>
+        <p className="subtitleProposte">
           I nostri itinerari pensati per ogni tipo di viaggiatore.
         </p>
         <SezioneViaggiComponent />
       </div>
-      <section class="prenota-cta">
-        <div class="cta-wrapper text-white d-flex flex-column align-items-center">
+      <section className="prenota-cta">
+        <div className="cta-wrapper text-white d-flex flex-column align-items-center">
           <h3>
             Il Giappone ti aspetta: <br />
             scegli la tua prossima avventura!
