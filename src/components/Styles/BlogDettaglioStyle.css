@@ -5,3 +5,9 @@
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(160, 123, 123, 0.05);
 }
+
+.jp {
+  color: #931d24;
+  font-weight: 500;
+  font-family: "Noto Sans JP", sans-serif;
+}

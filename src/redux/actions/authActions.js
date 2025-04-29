@@ -53,17 +53,19 @@ export const fetchUserProfile = () => async (dispatch) => {
   }
 }
 
-export const updateAvatarUrl = (url) => async (dispatch) => {
+export const updateAvatarFile = (file) => async (dispatch) => {
   try {
+    const formData = new FormData()
+    formData.append("avatarFile", file)
+
     const res = await fetch(
       "https://localhost:7156/api/Account/profile/avatar",
       {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(url),
+        body: formData,
       }
     )
 

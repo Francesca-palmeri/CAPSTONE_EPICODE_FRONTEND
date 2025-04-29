@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../redux/actions/authActions"
 import { BagHeart, BoxArrowLeft, PersonCheck } from "react-bootstrap-icons"
@@ -18,7 +18,6 @@ function NavBarComponent() {
     "Utente"
 
   const nomeUtente = userName?.split(" ")[0] || "Utente"
-
   const avatarUrl = user?.avatarUrl || "/img/user-avatar.png"
 
   const handleLogout = () => {
@@ -33,56 +32,82 @@ function NavBarComponent() {
         className="d-lg-flex justify-content-between align-items-center"
       >
         <Navbar.Brand as={Link} to="/">
-          <img src="/logonav.png" alt="Logo" className="logoNavbar" />
+          <img src="/logonav.png" alt="Logo" className="logoNavbar ms-3" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto flex-row">
             <div className="d-lg-flex justify-content-between align-items-center me-auto ">
-              <Nav.Link as={Link} to="/" className="HoverNavLink">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "NavLinkActive" : "HoverNavLink"
+                }
+              >
                 Home
-              </Nav.Link>
-              <Nav.Link as={Link} to="/Viaggi" className="HoverNavLink">
+              </NavLink>
+              <NavLink
+                to="/Viaggi"
+                className={({ isActive }) =>
+                  isActive ? "NavLinkActive" : "HoverNavLink"
+                }
+              >
                 Viaggi
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
+              </NavLink>
+              <NavLink
                 to="ViaggiPersonalizzati"
-                className="HoverNavLink text-center"
+                className={({ isActive }) =>
+                  isActive
+                    ? "NavLinkActive text-center "
+                    : "HoverNavLink text-center"
+                }
               >
                 Viaggi personalizzati
-              </Nav.Link>
+              </NavLink>
             </div>
             <div className="d-lg-flex justify-content-between align-items-center me-auto">
-              <Nav.Link as={Link} to="/BlogPage" className="HoverNavLink">
+              <NavLink
+                to="/BlogPage"
+                className={({ isActive }) =>
+                  isActive ? "NavLinkActive" : "HoverNavLink"
+                }
+              >
                 Blog
-              </Nav.Link>
-              <Nav.Link as={Link} to="/Contatti" className="HoverNavLink">
+              </NavLink>
+              <NavLink
+                to="/Contatti"
+                className={({ isActive }) =>
+                  isActive ? "NavLinkActive" : "HoverNavLink"
+                }
+              >
                 Contatti
-              </Nav.Link>
-              <Nav.Link as={Link} to="/FAQ" className="HoverNavLink">
+              </NavLink>
+              <NavLink
+                to="/FAQ"
+                className={({ isActive }) =>
+                  isActive ? "NavLinkActive" : "HoverNavLink"
+                }
+              >
                 FAQ
-              </Nav.Link>
+              </NavLink>
             </div>
           </Nav>
 
-          <div className="d-flex justify-content-between align-items-center ms-auto">
+          <div className="d-flex justify-content-between align-items-center ms-auto me-3">
             {!isAuthenticated ? (
               <>
-                <Nav.Link
-                  as={Link}
+                <NavLink
                   to="/RegistrationPage"
-                  className="nav-item  mx-lg-2"
+                  className="nav-item  mx-lg-2 text-danger-emphasis text-decoration-none"
                 >
                   Registrazione
-                </Nav.Link>
-                <Nav.Link
-                  as={Link}
+                </NavLink>
+                <NavLink
                   to="/LoginPage"
-                  className="nav-item ms-sm-4 me-lg-3 marginLoginNav"
+                  className="nav-item ms-sm-4 me-lg-3 text-danger-emphasis text-decoration-none marginLoginNav"
                 >
                   Login
-                </Nav.Link>
+                </NavLink>
               </>
             ) : (
               <NavDropdown
@@ -92,15 +117,16 @@ function NavBarComponent() {
               >
                 <div className=" d-flex justify-content-center align-items-center">
                   <img
-                    src={avatarUrl}
+                    src={`https://localhost:7156${avatarUrl}`}
                     alt="Avatar utente"
-                    className="imgProfilo mx-2"
+                    className="imgProfilo ms-2"
                   />
+
                   <div className="d-flex flex-column mt-2">
                     <NavDropdown.Item
                       as={Link}
                       to="/Profilo"
-                      className=" text-center m-0 fw-bold"
+                      className=" text-center text-danger m-0 fw-bold"
                     >
                       {userName}
                     </NavDropdown.Item>

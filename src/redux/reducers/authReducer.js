@@ -7,7 +7,6 @@ import {
   SET_USER_PROFILE,
 } from "../actions/authActions"
 
-// Funzione per decodificare il token (usata solo per dati minimi come email, id, ruoli ecc.)
 const decodeToken = (token) => {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]))
@@ -36,7 +35,7 @@ const authReducer = (state = initialState, action) => {
         token: action.payload,
         isAuthenticated: true,
         user: {
-          id: decodedUser?.sub, // o altro campo usato nel JWT
+          id: decodedUser?.sub,
           email: decodedUser?.email,
         },
         error: null,

@@ -158,10 +158,6 @@ const BlogDettaglioComponent = () => {
   const articoliCorrelati = lista.filter(
     (p) => p.categoria === postCopy.categoria && p.id !== postCopy.id
   )
-  // Pulizia dell'HTML: sostituisco class= con className=
-  const contenutoPulito = postCopy.contenuto
-    ? postCopy.contenuto.replace(/class=/g, "className=")
-    : ""
 
   return (
     <Container className="my-5">
@@ -187,7 +183,7 @@ const BlogDettaglioComponent = () => {
             <Card.Body className=" m-2">
               <Card.Text
                 className="contenuto-blog"
-                dangerouslySetInnerHTML={{ __html: contenutoPulito }}
+                dangerouslySetInnerHTML={{ __html: postCopy.contenuto }}
               ></Card.Text>
 
               <div className=" d-flex justify-content-between align-items-center">

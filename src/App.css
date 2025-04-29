@@ -32,6 +32,65 @@ body #root {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  border: 1px solid #860a10;
+  box-shadow: 1px 1px 10px rgb(255, 170, 170);
+}
+
+/* Link base */
+.HoverNavLink,
+.NavLinkActive {
+  position: relative;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 0;
+  color: #7a7a7a;
+  text-shadow: 1px 2px 0px rgb(255, 201, 201);
+  transition: color 0.3s ease;
+}
+
+/* Hover effetto */
+.HoverNavLink:hover {
+  color: #860a10;
+}
+
+/* Barra animata al passaggio del mouse */
+.HoverNavLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #860a10;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.HoverNavLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Link attivo */
+.NavLinkActive {
+  color: #e33154;
+  font-weight: 550;
+  text-shadow: 1px 1px 0px rgba(255, 91, 85, 0.24);
+}
+
+/* Barra sotto il link attivo */
+.NavLinkActive::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, #e33154, #ff5c51);
+  border-radius: 4px;
+  transform: scaleX(1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .nav-user-dropdown {
@@ -59,7 +118,7 @@ body #root {
 
 .dropdown-item:hover {
   background-color: #ffffff61;
-  color: #ba3c3c;
+  color: #c40000;
 }
 
 @keyframes dropdownFade {
@@ -87,7 +146,7 @@ body #root {
 
 @media screen and (max-width: 768px) {
   .marginLoginNav {
-    margin-right: 17em;
+    margin-right: 15.5em;
   }
   .nav-user-dropdown {
     max-width: 150px;
@@ -97,7 +156,7 @@ body #root {
 
 @media screen and (max-width: 576px) {
   .marginLoginNav {
-    margin-right: 11em;
+    margin-right: 5.5em;
   }
 }
 
@@ -109,7 +168,7 @@ body #root {
 
 .hero-section {
   position: relative;
-  height: 50vh;
+  height: 55vh;
   background-image: url("https://downtobaker.com/wp-content/uploads/2020/12/giappone-japan-1920x912-1.jpg?w=1920&h=768&crop=1");
   background-size: cover;
   background-position: center;
@@ -801,9 +860,4 @@ body #root {
   padding: 10px 0;
   font-size: 14px;
   margin-top: 0;
-}
-
-.jp {
-  font-weight: bold;
-  font-family: "Noto Sans JP", sans-serif;
 }

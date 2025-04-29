@@ -11,9 +11,10 @@ import {
   Button,
   Toast,
   ToastContainer,
+  Modal,
 } from "react-bootstrap"
 import { GetPrenotazioniUtente } from "../redux/actions/prenotazioniActions"
-import { updateAvatarUrl, deleteAvatar } from "../redux/actions/authActions"
+import { updateAvatarFile, deleteAvatar } from "../redux/actions/authActions"
 import {
   EnvelopeFill,
   CalendarDateFill,
@@ -22,12 +23,17 @@ import {
   JournalBookmarkFill,
   TelephoneFill,
   PencilFill,
+  FileImage,
+  TrashFill,
+  Plus,
 } from "react-bootstrap-icons"
 import "./Styles/ProfiloStyle.css"
 
 const ProfiloComponent = () => {
   const dispatch = useDispatch()
+
   const { isAuthenticated, token } = useSelector((state) => state.auth)
+  const stateAuth = useSelector((state) => state.auth)
   const {
     lista: prenotazioni,
     loading,
@@ -45,6 +51,10 @@ const ProfiloComponent = () => {
     phoneNumber: "",
     email: "",
   })
+
+  const [selectedAvatarFile, setSelectedAvatarFile] = useState(null)
+  const [avatarPreview, setAvatarPreview] = useState(null)
+  const [showPreviewModal, setShowPreviewModal] = useState(false)
 
   const [showToast, setShowToast] = useState(false)
 
@@ -79,6 +89,41 @@ const ProfiloComponent = () => {
       fetchProfilo()
     }
   }, [dispatch, isAuthenticated, token])
+
+  useEffect(() => {
+    if (profilo && stateAuth?.user?.avatarUrl) {
+      setProfilo((prev) => ({
+        ...prev,
+        avatarUrl: stateAuth.user.avatarUrl,
+      }))
+      setSelectedAvatarFile(null)
+      setAvatarPreview(null)
+    }
+  }, [stateAuth?.user?.avatarUrl])
+
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setSelectedAvatarFile(file)
+      setAvatarPreview(URL.createObjectURL(file))
+      setShowPreviewModal(true)
+    }
+  }
+
+  const handleAvatarSubmit = (e) => {
+    e.preventDefault()
+    if (selectedAvatarFile) {
+      dispatch(updateAvatarFile(selectedAvatarFile))
+      setShowPreviewModal(false)
+    }
+  }
+
+  const handleDeleteAvatar = () => {
+    if (window.confirm("Sei sicuro di voler rimuovere l'avatar?")) {
+      dispatch(deleteAvatar())
+      setProfilo((prev) => ({ ...prev, avatarUrl: null }))
+    }
+  }
 
   if (!isAuthenticated) {
     return (
@@ -119,67 +164,56 @@ const ProfiloComponent = () => {
           <PencilFill size={22} />
         </Button>
 
-        <Row className="align-items-center g-4">
-          <Col md={4} className="text-center">
-            <div className="d-flex justify-content-center align-items-center mb-3">
+        <Row className="align-items-center">
+          <Col
+            md={4}
+            className=" d-flex justify-content-center align-items-start text-center"
+          >
+            <div className="text-center position-relative d-inline-block">
               <img
-                src={profilo.avatarUrl || "/img/user-avatar.png"}
+                src={
+                  avatarPreview ||
+                  (profilo.avatarUrl
+                    ? `https://localhost:7156${profilo.avatarUrl}`
+                    : "/user-avatar.png")
+                }
                 alt="Avatar utente"
                 className="profilo-avatar"
               />
-            </div>
 
-            <Form
-              onSubmit={(e) => {
-                e.preventDefault()
-                const url = e.target.avatarUrl.value
-                if (url) {
-                  dispatch(updateAvatarUrl(url))
-                  setProfilo((prev) => ({ ...prev, avatarUrl: url }))
-                  e.target.reset()
-                }
-              }}
-            >
-              <Form.Group controlId="formAvatarUrl">
-                <Form.Control
-                  type="url"
-                  name="avatarUrl"
-                  placeholder="Incolla link immagine"
-                  className="mb-2"
-                  required
-                />
-              </Form.Group>
-              <Button
-                variant="outline-primary"
-                size="sm"
-                type="submit"
-                className="w-100"
+              <label
+                htmlFor="avatarFile"
+                className="btn btn-outline-danger badge-avatar-add d-flex align-items-center justify-content-center"
               >
-                Aggiorna Avatar
-              </Button>
-            </Form>
+                <Plus size={20} />
+              </label>
 
-            <Button
-              variant="outline-danger"
-              size="sm"
-              className="w-100 mt-2"
-              onClick={() => {
-                if (window.confirm("Sei sicuro di voler rimuovere l'avatar?")) {
-                  dispatch(deleteAvatar())
-                  setProfilo((prev) => ({ ...prev, avatarUrl: null }))
-                }
-              }}
-            >
-              Rimuovi Avatar
-            </Button>
+              <button
+                type="button"
+                className="btn btn-outline-dark badge-avatar-remove d-flex align-items-center justify-content-center"
+                onClick={handleDeleteAvatar}
+              >
+                <TrashFill />
+              </button>
+
+              <input
+                id="avatarFile"
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarUpload}
+                style={{ display: "none" }}
+              />
+            </div>
           </Col>
 
           <Col md={8}>
-            <h2 className="profilo-nome mb-4 d-flex justify-content-center align-items-center">
-              <span className="me-2 text-danger">🎎</span>
-              {profilo.firstName} {profilo.lastName}
-            </h2>
-            <div className="ms-5">
+            <div className=" mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center border-top border-3 border-danger-subtle mt-4">
+              <p className="text-danger fs-3">🎎</p>
+              <p className="profilo-nome text-center mt-0">
+                {profilo.firstName} {profilo.lastName}
+              </p>
+            </div>
+            <div className="ms-lg-5 text-center text-md-start">
               <p className="text-danger mb-0">
                 <TelephoneFill /> <strong>Telefono:</strong>
               </p>
@@ -196,6 +230,45 @@ const ProfiloComponent = () => {
           </Col>
         </Row>
       </Card>
+
+      {/* Modal Preview */}
+      <Modal
+        show={showPreviewModal}
+        onHide={() => {
+          setShowPreviewModal(false)
+          setSelectedAvatarFile(null)
+          setAvatarPreview(null)
+        }}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Anteprima Avatar</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          {avatarPreview && (
+            <img
+              src={avatarPreview}
+              alt="Anteprima Avatar"
+              className="avatar-preview-modal-img"
+            />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowPreviewModal(false)
+              setSelectedAvatarFile(null)
+              setAvatarPreview(null)
+            }}
+          >
+            Annulla
+          </Button>
+          <Button variant="primary" onClick={handleAvatarSubmit}>
+            Carica Avatar
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       {/* Form Modifica sotto */}
       {showEditForm && (
@@ -286,7 +359,10 @@ const ProfiloComponent = () => {
                     type="tel"
                     value={formData.phoneNumber}
                     onChange={(e) =>
-                      setFormData({ ...formData, phoneNumber: e.target.value })
+                      setFormData({
+                        ...formData,
+                        phoneNumber: e.target.value,
+                      })
                     }
                   />
                 </Form.Group>

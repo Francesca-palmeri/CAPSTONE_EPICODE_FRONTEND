@@ -40,32 +40,41 @@ const PrenotazioniComponent = () => {
   )
   const { viaggi } = useSelector((state) => state.viaggi)
 
-  const ruolo =
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [prenotazioneDaModificare, setPrenotazioneDaModificare] = useState(null)
+  const [showToast, setShowToast] = useState(false)
+
+  const ruoloUtente =
     user?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
   const utenteId =
     user?.[
       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
     ]
-  const isAdmin = ruolo === "Admin"
-
-  const [showEditModal, setShowEditModal] = useState(false)
-  const [prenotazioneDaModificare, setPrenotazioneDaModificare] = useState(null)
-  const [showToast, setShowToast] = useState(false)
+  const isAdmin = ruoloUtente === "Admin"
 
   useEffect(() => {
-    if (!user) return
+    if (!user || !ruoloUtente) return
     dispatch(GetViaggi())
-    isAdmin
-      ? dispatch(GetTutteLePrenotazioni())
-      : dispatch(GetPrenotazioniUtente(utenteId))
-  }, [dispatch, user, isAdmin, utenteId])
+
+    if (isAdmin) {
+      dispatch(GetTutteLePrenotazioni())
+    } else if (utenteId) {
+      dispatch(GetPrenotazioniUtente(utenteId))
+    }
+  }, [dispatch, user, ruoloUtente, utenteId, isAdmin])
+
+  const refreshPrenotazioni = () => {
+    if (isAdmin) {
+      dispatch(GetTutteLePrenotazioni())
+    } else if (utenteId) {
+      dispatch(GetPrenotazioniUtente(utenteId))
+    }
+  }
 
   const handleDelete = (id) => {
     if (window.confirm("Sei sicuro di voler eliminare questa prenotazione?")) {
       dispatch(DeletePrenotazione(id)).then(() => {
-        isAdmin
-          ? dispatch(GetTutteLePrenotazioni())
-          : dispatch(GetPrenotazioniUtente(utenteId))
+        refreshPrenotazioni()
         setShowToast(true)
       })
     }
@@ -74,9 +83,7 @@ const PrenotazioniComponent = () => {
   const handleUpdateSubmit = (e) => {
     e.preventDefault()
     dispatch(UpdatePrenotazione(prenotazioneDaModificare)).then(() => {
-      isAdmin
-        ? dispatch(GetTutteLePrenotazioni())
-        : dispatch(GetPrenotazioniUtente(utenteId))
+      refreshPrenotazioni()
       setShowEditModal(false)
       setShowToast(true)
     })
@@ -119,7 +126,6 @@ const PrenotazioniComponent = () => {
                     <Card.Title className="text-danger mb-4">
                       {p.nomeUtente} {p.cognomeUtente}
                     </Card.Title>
-
                     <p className="mb-2">
                       <CalendarDateFill className="me-2 icons-color" />
                       <strong>Data:</strong>{" "}
@@ -139,12 +145,12 @@ const PrenotazioniComponent = () => {
                     </p>
                     {p.note && (
                       <p className="mb-0">
-                        {" "}
-                        <BookmarkStarFill className=" text-danger fs-5" />{" "}
+                        <BookmarkStarFill className="text-danger fs-5" />{" "}
                         <strong>Note:</strong> {p.note}
                       </p>
                     )}
                   </div>
+
                   {isAdmin && (
                     <div className="mt-auto d-flex justify-content-between align-items-center">
                       <Button
@@ -177,7 +183,7 @@ const PrenotazioniComponent = () => {
         <p>Nessuna prenotazione trovata.</p>
       )}
 
-      {/* Modal Modifica Prenotazione */}
+      {/* Modal Modifica */}
       <Modal
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
@@ -209,11 +215,11 @@ const PrenotazioniComponent = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Viaggio</Form.Label>
                 <Form.Select
-                  value={prenotazioneDaModificare.viaggioId}
+                  value={prenotazioneDaModificare.viaggioId || ""}
                   onChange={(e) =>
                     setPrenotazioneDaModificare((prev) => ({
                       ...prev,
-                      viaggioId: parseInt(e.target.value),
+                      viaggioId: parseInt(e.target.value) || 0,
                     }))
                   }
                 >
@@ -230,11 +236,12 @@ const PrenotazioniComponent = () => {
                 <Form.Label>Numero Partecipanti</Form.Label>
                 <Form.Control
                   type="number"
-                  value={prenotazioneDaModificare.numeroPartecipanti}
+                  min="1"
+                  value={prenotazioneDaModificare.numeroPartecipanti || 1}
                   onChange={(e) =>
                     setPrenotazioneDaModificare((prev) => ({
                       ...prev,
-                      numeroPartecipanti: parseInt(e.target.value),
+                      numeroPartecipanti: parseInt(e.target.value) || 1,
                     }))
                   }
                   required
