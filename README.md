@@ -95,11 +95,11 @@ Questa è un'applicazione full-stack che mette in comunicazione utenti appassion
 # Clona il repository
 git clone 
 
-# Backend <https://github.com/Francesca-palmeri/CAPSTONE_EPICODE_BE>
+# Backend ---> link repository: <https://github.com/Francesca-palmeri/CAPSTONE_EPICODE_BE>
 cd backend
 dotnet run
 
-# Frontend <https://github.com/Francesca-palmeri/CAPSTONE_EPICODE_FRONTEND>
+# Frontend ---> link repository: <https://github.com/Francesca-palmeri/CAPSTONE_EPICODE_FRONTEND>
 cd frontend
 npm install
 npm run dev
