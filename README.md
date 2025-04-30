@@ -76,6 +76,19 @@ Questa è un'applicazione full-stack che mette in comunicazione utenti appassion
 
 ---
 
+## 🖥️ Editor consigliati
+
+- **Backend**: Visual Studio 2022 o superiore  
+  Offre strumenti avanzati per progetti ASP.NET Core, Entity Framework, debug e integrazione SQL Server.
+
+- **Frontend**: Visual Studio Code  
+  Leggero e flessibile, perfetto per React, Redux Toolkit e sviluppo con Vite. Consigliati i plugin:
+  - ESLint
+  - Prettier
+  - React Developer Tools
+    
+---
+
 ## ⚙️ Installazione
 
 ```bash
