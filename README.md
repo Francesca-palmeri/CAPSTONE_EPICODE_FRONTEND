@@ -137,8 +137,12 @@ Deve essere creato manualmente all'interno del progetto.
 Se desideri contribuire al miglioramento del progetto, sei il benvenuto!
 Puoi aprire una pull request con suggerimenti, fix o nuove funzionalità.
 
-## 📜 Licenza
-Questo progetto è distribuito a scopo educativo come Capstone del Corso Full Stack Epicode.
+## 📜 License
+
+This project, **Capstone Travel Blog Giappone**, is licensed under the GNU General Public License v3.0.
+
+See the [LICENSE](LICENSE) file for more details.
+
 
 ## 👥 Developers
 Francesca Palmeri - studente Epicode classe FS0924
