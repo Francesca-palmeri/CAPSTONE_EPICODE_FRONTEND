@@ -23,9 +23,11 @@ import {
   JournalBookmarkFill,
   TelephoneFill,
   PencilFill,
-  FileImage,
+  BookmarkStarFill,
   TrashFill,
   Plus,
+  Bookmark,
+  BookmarkFill,
 } from "react-bootstrap-icons"
 import "./Styles/ProfiloStyle.css"
 
@@ -411,7 +413,10 @@ const ProfiloComponent = () => {
             <Col xs={12} md={6} lg={4} key={p.id}>
               <Card className="prenotazione-card h-100 shadow-sm border border-danger-subtle">
                 <Card.Body>
-                  <Card.Title className="mb-3">{p.titoloViaggio}</Card.Title>
+                  <Card.Title className="mb-3">
+                    {p.titoloViaggio ? p.titoloViaggio : "Personalizzato"}
+                  </Card.Title>
+
                   <p className="mb-2">
                     <CalendarDateFill className="me-2 text-warning" />{" "}
                     <strong>Data:</strong>{" "}
@@ -425,9 +430,20 @@ const ProfiloComponent = () => {
                     <PersonFill className="me-2 text-danger" />{" "}
                     <strong>Tipologia:</strong> {p.tipologia}
                   </p>
+                  {p.descrizionePersonalizzata && (
+                    <>
+                      <p className=" text-danger fw-semibold mb-0 pb-1">
+                        <BookmarkStarFill /> Richieste personalizzate:
+                      </p>
+
+                      <div className="descrizione-scroll">
+                        <p className="mb-2">{p.descrizionePersonalizzata}</p>
+                      </div>
+                    </>
+                  )}
                   {p.note && (
-                    <p className="mb-0">
-                      <EnvelopeFill className="me-2 text-secondary" />{" "}
+                    <p className="mb-0 mt-2">
+                      <BookmarkFill className="me-2 text-secondary" />{" "}
                       <strong>Note:</strong> {p.note}
                     </p>
                   )}

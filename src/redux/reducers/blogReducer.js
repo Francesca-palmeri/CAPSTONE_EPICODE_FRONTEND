@@ -18,34 +18,16 @@ const initialState = {
 const blogReducer = (state = initialState, action) => {
   switch (action.type) {
     case BLOG_LOADING:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      }
+      return { ...state, loading: true, error: null }
+
     case BLOG_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        lista: action.payload,
-      }
+      return { ...state, loading: false, lista: action.payload }
+
     case BLOG_DETAIL_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        dettaglio: action.payload,
-      }
-    case BLOG_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      }
+      return { ...state, loading: false, dettaglio: action.payload }
+
     case ADD_BLOG_SUCCESS:
-      return {
-        ...state,
-        lista: [action.payload, ...state.lista],
-      }
+      return { ...state, lista: [action.payload, ...state.lista] }
 
     case DELETE_BLOG_SUCCESS:
       return {
@@ -60,6 +42,9 @@ const blogReducer = (state = initialState, action) => {
           post.id === action.payload.id ? action.payload : post
         ),
       }
+
+    case BLOG_FAILURE:
+      return { ...state, loading: false, error: action.payload }
 
     default:
       return state

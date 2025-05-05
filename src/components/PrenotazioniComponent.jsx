@@ -29,6 +29,8 @@ import {
   GlobeAsiaAustralia,
   Crosshair2,
   BookmarkStarFill,
+  Bookmark,
+  BookmarkFill,
 } from "react-bootstrap-icons"
 import "./Styles/PrenotazioniStyles.css"
 
@@ -38,6 +40,7 @@ const PrenotazioniComponent = () => {
   const { lista, loading, error } = useSelector(
     (state) => state.prenotazioniLista
   )
+  console.log(lista)
   const { viaggi } = useSelector((state) => state.viaggi)
 
   const [showEditModal, setShowEditModal] = useState(false)
@@ -143,9 +146,21 @@ const PrenotazioniComponent = () => {
                       <Crosshair2 className="icons-color" />{" "}
                       <strong>Tipologia:</strong> {p.tipologia}
                     </p>
+                    {p.descrizionePersonalizzata && (
+                      <>
+                        <p className=" text-danger fw-semibold mb-0 pb-1">
+                          <BookmarkStarFill /> Richieste personalizzate:
+                        </p>
+
+                        <div className="descrizione-scroll">
+                          <p className="mb-2">{p.descrizionePersonalizzata}</p>
+                        </div>
+                      </>
+                    )}
+
                     {p.note && (
-                      <p className="mb-0">
-                        <BookmarkStarFill className="text-danger fs-5" />{" "}
+                      <p className="mb-0 mt-3">
+                        <BookmarkFill className="text-danger-emphasis " />{" "}
                         <strong>Note:</strong> {p.note}
                       </p>
                     )}
@@ -265,7 +280,22 @@ const PrenotazioniComponent = () => {
                   <option value="personalizzato">Viaggio personalizzato</option>
                 </Form.Select>
               </Form.Group>
-
+              <Form.Group className="mb-3">
+                <Form.Label>Descrizione personalizzata</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={
+                    prenotazioneDaModificare.descrizionePersonalizzata || ""
+                  }
+                  onChange={(e) =>
+                    setPrenotazioneDaModificare((prev) => ({
+                      ...prev,
+                      descrizionePersonalizzata: e.target.value,
+                    }))
+                  }
+                />
+              </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Note</Form.Label>
                 <Form.Control

@@ -50,14 +50,14 @@ const PrenotazioniPersonalizzateComponent = () => {
           <PrenotazioneFormComponent />
           <div className="text-center mt-4 ">
             <p className="titleSlogan">
-              Non sai cosa scegliere tra gli itinerari già proposti?
+              Non sei ancora sicuro o vuoi chiederci ulteriori informazioni?
             </p>
             <p className="lead ">
-              Puoi contattarci direttamente tramite il modulo che trovi nella
-              pagina{" "}
+              Puoi contattarci tramite numero di telefono o compilando il form
+              che trovi nella pagina{" "}
               <Link to={"/Contatti"} className=" text-danger fw-bold">
                 CONTATTI
-              </Link>
+              </Link>{" "}
             </p>
           </div>
         </Col>

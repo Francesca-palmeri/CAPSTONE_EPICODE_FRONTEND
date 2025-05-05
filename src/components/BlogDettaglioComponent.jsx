@@ -1,21 +1,30 @@
 import { useParams, Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { Container, Card, Row, Col, Button } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import { Container, Card, Row, Col, Button, Spinner } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import {
   ArrowBarLeft,
-  PencilFill,
   Send,
-  TrashFill,
   Eye,
   ChatLeftDots,
   Heart,
 } from "react-bootstrap-icons"
-import "./Styles/BlogDettaglioStyle.css"
+import CommentoComponent from "./CommentoComponent"
+import { getBlogPostById } from "../redux/actions/blogActions"
 
 const BlogDettaglioComponent = () => {
   const { postId } = useParams()
-  const { lista } = useSelector((state) => state.blog)
+  const dispatch = useDispatch()
+
+  const { lista, dettaglio, loading, error } = useSelector(
+    (state) => state.blog
+  )
+
+  const [postCopy, setPostCopy] = useState(null)
+  const [nuovoCommento, setNuovoCommento] = useState("")
+  const [inviando, setInviando] = useState(false)
+  const [erroreInvio, setErroreInvio] = useState("")
+  const [mostraFormCommento, setMostraFormCommento] = useState(false)
 
   const getUserFromToken = () => {
     const token = localStorage.getItem("token")
@@ -32,21 +41,23 @@ const BlogDettaglioComponent = () => {
 
   const currentUser = getUserFromToken()
 
-  const post = Array.isArray(lista)
-    ? lista.find((p) => p.id === parseInt(postId))
-    : null
+  useEffect(() => {
+    const foundPost = Array.isArray(lista)
+      ? lista.find((p) => p.id === parseInt(postId))
+      : null
 
-  const [postCopy, setPostCopy] = useState(post)
-  const [nuovoCommento, setNuovoCommento] = useState("")
-  const [inviando, setInviando] = useState(false)
-  const [erroreInvio, setErroreInvio] = useState("")
-  const [commentoInModifica, setCommentoInModifica] = useState(null)
-  const [testoModificato, setTestoModificato] = useState("")
-  const [mostraFormCommento, setMostraFormCommento] = useState(false)
+    if (foundPost) {
+      setPostCopy(foundPost)
+    } else {
+      dispatch(getBlogPostById(postId))
+    }
+  }, [postId, lista, dispatch])
 
   useEffect(() => {
-    setPostCopy(post)
-  }, [post])
+    if (dettaglio && dettaglio.id === parseInt(postId)) {
+      setPostCopy(dettaglio)
+    }
+  }, [dettaglio, postId])
 
   const handleInvioCommento = async () => {
     if (!nuovoCommento.trim()) return
@@ -118,7 +129,7 @@ const BlogDettaglioComponent = () => {
     }
   }
 
-  const handleSalvaModifica = async (commentoId) => {
+  const handleSalvaModifica = async (commentoId, nuovoTesto) => {
     try {
       const res = await fetch(
         `https://localhost:7156/api/Commenti/${commentoId}`,
@@ -128,29 +139,40 @@ const BlogDettaglioComponent = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          body: JSON.stringify({ testo: testoModificato }),
+          body: JSON.stringify({ testo: nuovoTesto }),
         }
       )
 
       if (!res.ok) throw new Error("Errore nella modifica del commento")
 
-      const commentiAggiornati = postCopy.commenti.map((c) =>
-        c.id === commentoId ? { ...c, testo: testoModificato } : c
-      )
-
-      setPostCopy({ ...postCopy, commenti: commentiAggiornati })
-      setCommentoInModifica(null)
-      setTestoModificato("")
+      setPostCopy((prev) => ({
+        ...prev,
+        commenti: prev.commenti.map((c) =>
+          c.id === commentoId ? { ...c, testo: nuovoTesto } : c
+        ),
+      }))
     } catch (err) {
       alert("Errore: " + err.message)
     }
   }
 
-  if (!postCopy) {
+  if (loading || !postCopy) {
+    return (
+      <Container className="mt-5 text-center">
+        <Spinner animation="border" variant="danger" />
+        <p className="mt-3">Caricamento articolo...</p>
+      </Container>
+    )
+  }
+
+  if (error) {
     return (
       <Container className="mt-5">
-        <h2>Articolo non trovato</h2>
-        <p>Il post richiesto non è disponibile o non è stato caricato.</p>
+        <h2>Errore</h2>
+        <p>{error}</p>
+        <Button as={Link} to="/BlogPage" variant="outline-danger">
+          Torna al catalogo
+        </Button>
       </Container>
     )
   }
@@ -258,101 +280,18 @@ const BlogDettaglioComponent = () => {
         Commenti
       </p>
 
-      {postCopy.commenti && postCopy.commenti.length > 0 ? (
-        postCopy.commenti.map((commento) => {
-          const isAutore =
-            currentUser?.[
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-            ] === commento.utenteId
-          const isAdmin =
-            currentUser?.[
-              "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-            ] === "Admin"
-
-          return (
-            <Card key={commento.id} className="mb-3 card-commento">
-              <Card.Body className="p-3">
-                <div className="d-flex justify-content-between align-items-center mb-1">
-                  <div className="d-flex align-items-center mb-1">
-                    {commento.avatarUrl && (
-                      <img
-                        src={commento.avatarUrl}
-                        alt="Avatar"
-                        className="rounded-circle me-2"
-                        width={36}
-                        height={36}
-                      />
-                    )}
-                    <div>
-                      <div className="fw-semibold text-danger-emphasis">
-                        {commento.utenteNome}
-                      </div>
-                      <div
-                        className="text-muted"
-                        style={{ fontSize: "0.75rem" }}
-                      >
-                        {new Date(commento.dataCreazione).toLocaleString(
-                          "it-IT"
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  {(isAutore || isAdmin) && (
-                    <div className=" m-0 p-0 d-flex justify-content-end">
-                      {isAutore && (
-                        <Button
-                          variant="outine-danger"
-                          className="text-danger p-0 me-2"
-                          onClick={() => {
-                            setCommentoInModifica(commento.id)
-                            setTestoModificato(commento.testo)
-                          }}
-                        >
-                          <PencilFill />
-                        </Button>
-                      )}
-                      <Button
-                        className=" text-dark bg-transparent border-0  p-0"
-                        onClick={() => handleEliminaCommento(commento.id)}
-                      >
-                        <TrashFill />
-                      </Button>
-                    </div>
-                  )}
-                </div>
-
-                {commentoInModifica === commento.id ? (
-                  <>
-                    <textarea
-                      className="form-control mb-2"
-                      rows="2"
-                      value={testoModificato}
-                      onChange={(e) => setTestoModificato(e.target.value)}
-                    />
-                    <Button
-                      variant="outline-success"
-                      className=" rounded-5 me-2 py-0"
-                      onClick={() => handleSalvaModifica(commento.id)}
-                    >
-                      Salva
-                    </Button>
-                    <Button
-                      variant="outline-danger"
-                      className=" rounded-5 me-2 py-0"
-                      onClick={() => setCommentoInModifica(null)}
-                    >
-                      Annulla
-                    </Button>
-                  </>
-                ) : (
-                  <p className=" ms-5">{commento.testo}</p>
-                )}
-              </Card.Body>
-            </Card>
-          )
-        })
+      {postCopy.commenti?.length > 0 ? (
+        postCopy.commenti.map((commento) => (
+          <CommentoComponent
+            key={commento.id}
+            commento={commento}
+            currentUser={currentUser}
+            onElimina={handleEliminaCommento}
+            onSalvaModifica={handleSalvaModifica}
+          />
+        ))
       ) : (
-        <p className="text-muted">Nessun commento disponibile.</p>
+        <p className="text-muted text-center">Nessun commento disponibile.</p>
       )}
 
       {articoliCorrelati.length > 0 && (

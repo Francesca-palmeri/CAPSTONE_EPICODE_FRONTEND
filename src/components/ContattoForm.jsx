@@ -157,7 +157,7 @@ const ContattoForm = () => {
             <span className="ps-2">
               Confermo di aver letto e compreso l'{" "}
               <Link
-                to="/PrivacyPolicy"
+                to="/privacy"
                 className="text-decoration-none text-danger fw-bold"
               >
                 informativa sulla privacy

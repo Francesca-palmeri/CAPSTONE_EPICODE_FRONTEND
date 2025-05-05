@@ -73,13 +73,33 @@
 }
 
 .prenotazione-card p {
-  font-size: 1.2rem;
   color: #18232e;
+  font-size: 1rem !important;
 }
 
 .icons-color {
   color: #ecbe69;
   font-size: large;
+}
+
+.descrizione-scroll {
+  border: 1px solid #c12746;
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.descrizione-scroll p {
+  margin: 0;
+}
+
+.descrizione-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.descrizione-scroll::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
 }
 
 .btn-modifica {

@@ -38,6 +38,7 @@ const PrenotazioneFormComponent = () => {
     numeroPartecipanti: 1,
     tipologia: "personalizzato",
     note: "",
+    descrizionePersonalizzata: "",
   })
 
   useEffect(() => {
@@ -54,34 +55,70 @@ const PrenotazioneFormComponent = () => {
 
   const generatePDF = (data, titoloViaggio, email, numeroConferma) => {
     const doc = new jsPDF()
-    doc.setFontSize(16)
-    doc.text("Conferma Prenotazione", 20, 20)
+    let y = 20
+    const lineHeight = 7
+    const maxWidth = 170
+
+    doc.setFontSize(18).text("Conferma Prenotazione", 20, y)
+    y += 10
 
     doc.setFontSize(12)
-    doc.text(`Grazie ${data.nomeUtente}`, 20, 30)
-    doc.text(`Email: ${email}`, 20, 38)
-    doc.text(`Numero prenotazione: #${numeroConferma}`, 20, 46)
+    doc.text(`Grazie: ${data.nomeUtente}`, 20, y)
+    y += lineHeight
+    doc.text(`Email: ${email}`, 20, y)
+    y += lineHeight
+    doc.text(`Numero prenotazione: #${numeroConferma}`, 20, y)
+    y += lineHeight
 
-    doc.text("Dettagli prenotazione:", 20, 58)
-    doc.text(`Viaggio: ${titoloViaggio}`, 20, 66)
+    doc.line(20, y, 190, y)
+    y += lineHeight
+
+    doc.text("Dettagli prenotazione:", 20, y)
+    y += lineHeight
+    doc.text(`Viaggio: ${titoloViaggio}`, 20, y)
+    y += lineHeight
     doc.text(
       `Data Prenotazione: ${new Date(data.dataPrenotazione).toLocaleDateString(
         "it-IT"
       )}`,
       20,
-      74
+      y
     )
-    doc.text(`Partecipanti: ${data.numeroPartecipanti}`, 20, 82)
-    doc.text(`Tipologia: ${data.tipologia}`, 20, 90)
-    if (data.note) doc.text(`Note: ${data.note}`, 20, 98)
+    y += lineHeight
+    doc.text(`Partecipanti: ${data.numeroPartecipanti}`, 20, y)
+    y += lineHeight
+    doc.text(`Tipologia: ${data.tipologia}`, 20, y)
+    y += lineHeight
 
-    doc.setFontSize(11)
-    doc.text(
-      "Grazie per averci contattato! Verrai ricontattato al più presto da uno dei nostri operatori per preparare il viaggio perfetto per te.",
-      20,
-      110,
-      { maxWidth: 170 }
-    )
+    if (data.tipologia === "personalizzato" && data.descrizionePersonalizzata) {
+      doc.text("Descrizione personalizzata:", 20, y)
+      y += lineHeight
+
+      const descrLines = doc.splitTextToSize(
+        data.descrizionePersonalizzata,
+        maxWidth
+      )
+      doc.text(descrLines, 20, y)
+      y += descrLines.length * lineHeight
+    }
+
+    if (data.note) {
+      doc.text("Note:", 20, y)
+      y += lineHeight
+
+      const noteLines = doc.splitTextToSize(data.note, maxWidth)
+      doc.text(noteLines, 20, y)
+      y += noteLines.length * lineHeight
+    }
+
+    doc.line(20, y, 190, y)
+    y += lineHeight
+
+    doc.setFontSize(11).setFont("helvetica", "italic")
+    const thanksText =
+      "Grazie per averci contattato! Ti ricontatteremo presto per preparare il viaggio perfetto per te."
+    const thanksLines = doc.splitTextToSize(thanksText, maxWidth)
+    doc.text(thanksLines, 20, y)
 
     doc.save("conferma-prenotazione.pdf")
   }
@@ -91,6 +128,8 @@ const PrenotazioneFormComponent = () => {
 
     const payload = {
       ...formData,
+      viaggioId:
+        formData.tipologia === "personalizzato" ? null : formData.viaggioId,
       utenteId,
       dataPrenotazione: new Date(formData.dataPrenotazione).toISOString(),
     }
@@ -99,8 +138,10 @@ const PrenotazioneFormComponent = () => {
     dispatch(GetPrenotazioniUtente(utenteId))
 
     const titoloViaggio =
-      viaggi.find((v) => v.id === parseInt(formData.viaggioId))?.titolo ||
-      "Viaggio"
+      formData.tipologia === "personalizzato"
+        ? "Viaggio Personalizzato"
+        : viaggi.find((v) => v.id === parseInt(formData.viaggioId))?.titolo ||
+          "Viaggio"
 
     const numeroConferma = Math.floor(100000 + Math.random() * 900000)
 
@@ -131,8 +172,8 @@ const PrenotazioneFormComponent = () => {
       <Container className="my-5 prenotazione-form-container">
         <h3 className="mb-4">Effettua una prenotazione</h3>
         <p>
-          Seleziona il viaggio che più ti interessa e se hai rischieste
-          particolari inseriscile dentro il form sotto "RICHIESTE AGGIUNTIVE"
+          Seleziona il viaggio che più ti interessa oppure richiedine uno
+          personalizzato
         </p>
 
         <Form onSubmit={handleSubmit}>
@@ -145,9 +186,9 @@ const PrenotazioneFormComponent = () => {
                 name="viaggioId"
                 value={formData.viaggioId}
                 onChange={handleChange}
-                required
               >
                 <option value="">-- Seleziona un viaggio --</option>
+                <option value="personalizzato">Personalizzato</option>
                 {viaggi.map((v) => (
                   <option key={v.id} value={v.id}>
                     {v.titolo}
@@ -181,6 +222,20 @@ const PrenotazioneFormComponent = () => {
               <option value="personalizzato">Personalizzato</option>
             </Form.Select>
           </Form.Group>
+          {formData.tipologia === "personalizzato" && (
+            <Form.Group className="mb-3">
+              <Form.Label>Descrivi il viaggio che desideri</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={4}
+                name="descrizionePersonalizzata"
+                value={formData.descrizionePersonalizzata}
+                onChange={handleChange}
+                placeholder="Descrivi le mete, il periodo, il budget, ecc."
+                required
+              />
+            </Form.Group>
+          )}
 
           <Form.Group className="mb-3">
             <Form.Label>Richieste aggiuntive</Form.Label>
@@ -190,7 +245,7 @@ const PrenotazioneFormComponent = () => {
               name="note"
               value={formData.note}
               onChange={handleChange}
-              placeholder="Inserisci eventuali preferenze o richieste"
+              placeholder="Inserisci eventuali preferenze o necessità specifiche"
             />
           </Form.Group>
 
@@ -203,17 +258,23 @@ const PrenotazioneFormComponent = () => {
             Errore: {error}
           </Alert>
         )}
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          centered
+          size="xl"
+        >
           <Modal.Header closeButton>
             <Modal.Title>Conferma Prenotazione</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {datiConferma && (
-              <>
+              <div>
                 <p>
                   <strong>Numero prenotazione:</strong> #
                   {datiConferma.numeroConferma}
                 </p>
+                <hr />
                 <p>
                   <strong>Viaggio:</strong> {datiConferma.titoloViaggio}
                 </p>
@@ -230,19 +291,33 @@ const PrenotazioneFormComponent = () => {
                 <p>
                   <strong>Tipologia:</strong> {datiConferma.tipologia}
                 </p>
+                {datiConferma.tipologia === "personalizzato" && (
+                  <>
+                    <hr />
+                    <p>
+                      <strong>Descrizione personalizzata:</strong>
+                    </p>
+                    <p>{datiConferma.descrizionePersonalizzata}</p>
+                  </>
+                )}
                 {datiConferma.note && (
-                  <p>
-                    <strong>Note:</strong> {datiConferma.note}
-                  </p>
+                  <>
+                    <hr />
+                    <p>
+                      <strong>Note aggiuntive:</strong>
+                    </p>
+                    <p>{datiConferma.note}</p>
+                  </>
                 )}
                 <hr />
                 <p className="text-success">
                   Grazie per la tua prenotazione! Ti invieremo a breve ulteriori
                   dettagli.
                 </p>
-              </>
+              </div>
             )}
           </Modal.Body>
+
           <Modal.Footer>
             <Button
               variant="outline-primary"
