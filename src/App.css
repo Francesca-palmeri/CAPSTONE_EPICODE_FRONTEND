@@ -28,6 +28,12 @@ body #root {
   padding: 0;
 }
 
+@media screen and (max-width: 567px) {
+  .logoNavbar {
+    width: 145px;
+  }
+}
+
 .imgProfilo {
   width: 60px;
   height: 60px;
@@ -48,7 +54,15 @@ body #root {
   transition: color 0.3s ease;
 }
 
-/* Hover effetto */
+@media screen and (max-width: 768px) {
+  .HoverNavLink,
+  .NavLinkActive {
+    display: block;
+    margin: 5px auto;
+    padding: 0;
+  }
+}
+
 .HoverNavLink:hover {
   color: #860a10;
 }
@@ -74,7 +88,7 @@ body #root {
 
 /* Link attivo */
 .NavLinkActive {
-  color: #e33154;
+  color: #860a10;
   font-weight: 550;
   text-shadow: 1px 1px 0px rgba(255, 91, 85, 0.24);
 }
@@ -87,7 +101,7 @@ body #root {
   left: 0;
   height: 1px;
   width: 100%;
-  background: linear-gradient(to right, #e33154, #ff5c51);
+  background: #860a10;
   border-radius: 4px;
   transform: scaleX(1);
   transition: transform 0.3s ease-in-out;
@@ -104,9 +118,9 @@ body #root {
 .nav-user-dropdown .dropdown-menu {
   border-radius: 12px;
   min-width: 250px;
-  background-color: #ffe8e4ea;
+  background-color: #ffefec;
   border: none;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
   animation: dropdownFade 0.3s ease-in-out;
 }
 
@@ -136,27 +150,24 @@ body #root {
   .nav-user-dropdown .dropdown-menu {
     right: auto !important;
     left: 100% !important;
+    top: 140%;
     transform: translateX(-100%) !important;
   }
 }
 
-.marginLoginNav {
-  margin-right: 8.7em;
-}
-
 @media screen and (max-width: 768px) {
-  .marginLoginNav {
-    margin-right: 15.5em;
-  }
   .nav-user-dropdown {
     max-width: 150px;
-    padding-left: 0;
+    margin-left: 80%;
+  }
+  .nav-user-dropdown .dropdown-menu {
+    left: -40%;
+    top: 50px;
   }
 }
-
 @media screen and (max-width: 576px) {
-  .marginLoginNav {
-    margin-right: 5.5em;
+  .nav-user-dropdown {
+    margin-left: 0;
   }
 }
 
@@ -426,7 +437,7 @@ body #root {
   }
   .reglogFormControl,
   .reglogFormControl:focus {
-    width: 250px;
+    width: 350px;
     height: 20px;
     font-size: 0.8em;
   }
@@ -440,15 +451,16 @@ body #root {
 @media screen and (max-width: 768px) {
   .columnRegister {
     height: 32em;
-    top: 25%;
+    width: 70%;
+    top: 27%;
   }
   .reglogFormControl,
   .reglogFormControl:focus {
-    width: 150px;
+    width: 250px;
     font-size: 0.6em;
   }
   .IconShowPassword {
-    right: 55px;
+    right: 130px;
     font-size: 0.8rem;
   }
   .smalltextLog {
@@ -458,11 +470,10 @@ body #root {
 
 @media screen and (max-width: 576px) {
   .columnRegister {
-    width: 50%;
-    top: 25%;
+    width: 80%;
   }
   .IconShowPassword {
-    right: 35px;
+    right: 30px;
     top: 30%;
   }
   .titleLog {

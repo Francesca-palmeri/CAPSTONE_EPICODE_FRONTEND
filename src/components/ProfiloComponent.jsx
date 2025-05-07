@@ -26,7 +26,7 @@ import {
   BookmarkStarFill,
   TrashFill,
   Plus,
-  Bookmark,
+  GlobeAsiaAustralia,
   BookmarkFill,
 } from "react-bootstrap-icons"
 import "./Styles/ProfiloStyle.css"
@@ -418,13 +418,17 @@ const ProfiloComponent = () => {
                   </Card.Title>
 
                   <p className="mb-2">
-                    <CalendarDateFill className="me-2 text-warning" />{" "}
-                    <strong>Data:</strong>{" "}
+                    <CalendarDateFill className="me-2 text-danger" />{" "}
+                    <strong>Data prenotazione:</strong>{" "}
                     {new Date(p.dataPrenotazione).toLocaleDateString("it-IT")}
                   </p>
                   <p className="mb-2">
-                    <PeopleFill className="me-2 text-success" />{" "}
+                    <PeopleFill className="me-2  text-danger" />{" "}
                     <strong>Partecipanti:</strong> {p.numeroPartecipanti}
+                  </p>
+                  <p className="mb-2">
+                    <GlobeAsiaAustralia className=" text-danger" />{" "}
+                    <strong>Viaggio:</strong> {p.titoloViaggio}
                   </p>
                   <p className="mb-2">
                     <PersonFill className="me-2 text-danger" />{" "}

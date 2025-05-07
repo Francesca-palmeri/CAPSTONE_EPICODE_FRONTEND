@@ -35,7 +35,7 @@ const LoginComponent = () => {
             >
               <div className=" d-flex flex-column loginFormGroup">
                 <h2 className="text-white text-center  titleLog">Benvenuto!</h2>
-                <h5 className=" jp m-auto">ようこそ！</h5>
+                <h5 className=" m-auto">ようこそ！</h5>
                 <Form.Group className="mt-3 text-center">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
