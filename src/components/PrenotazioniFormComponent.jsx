@@ -30,7 +30,10 @@ const PrenotazioneFormComponent = () => {
   const nomeUtente =
     user?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
     "Utente"
-  const emailUtente = user?.["email"] || "utente@esempio.com"
+  const emailUtente =
+    user?.[
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+    ] || "utente@esempio.com"
 
   const [formData, setFormData] = useState({
     viaggioId: "",
@@ -53,7 +56,7 @@ const PrenotazioneFormComponent = () => {
     }))
   }
 
-  const generatePDF = (data, titoloViaggio, email, numeroConferma) => {
+  const generatePDF = (data, titoloViaggio, emailUtente, numeroConferma) => {
     const doc = new jsPDF()
     let y = 20
     const lineHeight = 7
@@ -65,7 +68,7 @@ const PrenotazioneFormComponent = () => {
     doc.setFontSize(12)
     doc.text(`Grazie: ${data.nomeUtente}`, 20, y)
     y += lineHeight
-    doc.text(`Email: ${email}`, 20, y)
+    doc.text(`Email: ${emailUtente}`, 20, y)
     y += lineHeight
     doc.text(`Numero prenotazione: #${numeroConferma}`, 20, y)
     y += lineHeight
@@ -116,7 +119,7 @@ const PrenotazioneFormComponent = () => {
 
     doc.setFontSize(11).setFont("helvetica", "italic")
     const thanksText =
-      "Grazie per averci contattato! Ti ricontatteremo presto per preparare il viaggio perfetto per te."
+      "Grazie per la tua prenotazione! Ti ricontatteremo entro 5 giorni lavorativi per preparare il viaggio perfetto per te."
     const thanksLines = doc.splitTextToSize(thanksText, maxWidth)
     doc.text(thanksLines, 20, y)
 

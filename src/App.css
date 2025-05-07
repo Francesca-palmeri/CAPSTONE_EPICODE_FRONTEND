@@ -158,7 +158,8 @@ body #root {
 @media screen and (max-width: 768px) {
   .nav-user-dropdown {
     max-width: 150px;
-    margin-left: 80%;
+    margin-left: 75%;
+    font-size: 1.2em;
   }
   .nav-user-dropdown .dropdown-menu {
     left: -40%;
@@ -168,7 +169,20 @@ body #root {
 @media screen and (max-width: 576px) {
   .nav-user-dropdown {
     margin-left: 0;
+    font-size: 0.9em;
   }
+}
+
+/*Navbar Toggle*/
+
+.custom-toggle {
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.custom-toggle .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath stroke='%238B0000' stroke-width='1' stroke-linecap='round' d='M4 8 Q15 5 26 8 M4 15 Q15 12 26 15 M4 22 Q15 19 26 22'/%3E %3C/svg%3E");
 }
 
 /* Hero Section */
@@ -252,7 +266,7 @@ body #root {
   background-color: #860a10;
   border: none;
   color: white;
-  height: 380px;
+  height: 400px;
 }
 
 /*Cards sezioneViaggiComponent*/
@@ -583,7 +597,8 @@ body #root {
 .viaggiCards .card-title {
   font-size: 1.6rem;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  text-shadow: 5px 3px 6px rgba(0, 0, 0, 0.8), 4px 1px 1px rgba(0, 0, 0, 0.422);
 }
 
 .viaggiCards .card-text {
@@ -615,15 +630,9 @@ body #root {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .viaggiCards .card-title {
-    font-size: 1.3rem;
-  }
-}
-
 @media screen and (max-width: 992px) {
   .viaggiCards .card-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .viaggiCards .card-text {
     font-size: 0.8rem;
@@ -638,9 +647,6 @@ body #root {
   }
 }
 @media screen and (max-width: 576px) {
-  .viaggiCards .card-title {
-    font-size: 1.6em;
-  }
   .viaggiCards .card-text {
     font-size: 1.2rem;
   }
@@ -737,17 +743,17 @@ body #root {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 100vh; /* per dare un'altezza minima */
+  min-height: 100vh;
   width: 100%;
   overflow: hidden;
 }
 
 .overlay-contatti {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.7) 0%,
@@ -773,19 +779,18 @@ body #root {
 }
 
 .custom-checkbox .checkbox-custom {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   border: 1px solid #000000;
-  border-radius: 4px;
-  display: inline-block;
+  border-radius: 3px;
   position: relative;
   background-color: transparent;
   transition: all 0.2s ease-in-out;
 }
 
 .custom-checkbox input[type="checkbox"]:checked + label .checkbox-custom {
-  background-color: #d00015;
-  border-color: white;
+  background-color: #e05e6b;
+  border-color: rgb(185, 0, 0);
 }
 
 .custom-checkbox
@@ -796,9 +801,9 @@ body #root {
   position: absolute;
   left: 1px;
   top: 0px;
-  width: 13px;
+  width: 12px;
   height: 12px;
-  border: solid white;
+  border: solid rgb(255, 255, 255);
   border-width: 0 3px 4px 0;
   transform: rotate(45deg);
 }

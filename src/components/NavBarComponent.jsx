@@ -108,7 +108,10 @@ function NavBarComponent() {
             </NavDropdown>
           )}
         </div>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="custom-toggle"
+        ></Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto flex-column flex-lg-row">
             <div className="d-lg-flex justify-content-between align-items-center text-center ">

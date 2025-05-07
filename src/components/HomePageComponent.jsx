@@ -71,9 +71,11 @@ const HomePageComponent = () => {
               />
               <CardBody className="">
                 <CardTitle className="RedTitles">Viaggi di Gruppo</CardTitle>
-                <CardText className=" py-lg-2 py-xl-4 px-xl-2">
-                  Unisciti ad altri appassionati per un'avventura guidata in
-                  Giappone.
+                <CardText className=" py-lg-2 ">
+                  Scopri il Giappone insieme ad altri viaggiatori con un
+                  itinerario completo e guidato. Accompagnatore locale,
+                  trasporti, alloggi e visite principali inclusi: la soluzione
+                  ideale per chi vuole un viaggio organizzato, senza pensieri.
                 </CardText>
               </CardBody>
             </Card>
@@ -89,9 +91,11 @@ const HomePageComponent = () => {
                 <CardTitle className="card-title  RedTitles">
                   Viaggi in Autonomia
                 </CardTitle>
-                <CardText className="card-text  py-lg-2 py-xl-4 px-xl-2">
-                  Itinerari suggeriti per esplorare in libertà, con il nostro
-                  supporto.
+                <CardText className="card-text  py-lg-2 px-xl-2">
+                  Viaggia al tuo ritmo con un itinerario su misura e tutte le
+                  prenotazioni già pronte. Libertà totale di esplorare, con la
+                  sicurezza di avere trasporti, alloggi e attività organizzati
+                  in anticipo.
                 </CardText>
               </CardBody>
             </Card>
@@ -107,8 +111,11 @@ const HomePageComponent = () => {
                 <CardTitle className="card-title  RedTitles">
                   Viaggi Personalizzati
                 </CardTitle>
-                <CardText className="card-text py-lg-2 py-xl-4 px-xl-2">
-                  Costruiamo insieme il tuo viaggio ideale, su misura per te.
+                <CardText className="card-text py-lg-2 px-xl-2">
+                  Costruiamo insieme il tuo viaggio ideale: un itinerario unico,
+                  creato su misura per i tuoi desideri. Ogni dettaglio è pensato
+                  per offrirti un’esperienza autentica e irripetibile in
+                  Giappone.
                 </CardText>
               </CardBody>
             </Card>

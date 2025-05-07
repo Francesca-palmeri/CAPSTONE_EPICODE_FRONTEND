@@ -153,16 +153,18 @@ const ContattoForm = () => {
             disabled={loading}
           />
           <label htmlFor="accettaPrivacy" className="d-flex align-items-center">
-            <span className="checkbox-custom" />
-            <span className="ps-2">
-              Confermo di aver letto e compreso l'{" "}
-              <Link
-                to="/privacy"
-                className="text-decoration-none text-danger fw-bold"
-              >
-                informativa sulla privacy
-              </Link>
-            </span>
+            <div className=" d-flex justify-content-center justify-content-lg-start align-items-baseline">
+              <p className="checkbox-custom" />
+              <p className="ps-2">
+                Confermo di aver letto e compreso l'{" "}
+                <Link
+                  to="/privacy"
+                  className="text-decoration-none text-danger fw-bold"
+                >
+                  informativa sulla privacy
+                </Link>
+              </p>
+            </div>
           </label>
         </div>
 
@@ -171,7 +173,6 @@ const ContattoForm = () => {
         </Button>
       </Form>
 
-      {/* TOAST Bootstrap inline */}
       <div
         className="toast-container position-fixed bottom-0 end-0 p-3"
         style={{ zIndex: 9999 }}

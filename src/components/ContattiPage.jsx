@@ -4,8 +4,8 @@ import { ChatDots } from "react-bootstrap-icons"
 
 const ContattiPage = () => {
   return (
-    <Container fluid className=" bg-white w-100 pb-5 bg-contattaci-header">
-      <div className="overlay-contatti">
+    <Container fluid className=" bg-white w-100 bg-contattaci-header p-0">
+      <div className="overlay-contatti py-5">
         <Row className="text-center">
           <Col xs={12} className=" my-4 bg-white bg-opacity-75">
             <h2 className=" colorTextContatti display-5 fw-bold pt-2 mb-0">
@@ -22,7 +22,7 @@ const ContattiPage = () => {
           <Col
             xs={12}
             lg={5}
-            className=" text-white text-center fw-bold fs-4 informazioniContatto pt-3 ms-lg-5"
+            className=" text-white text-center fw-bold fs-4 informazioniContatto pt-lg-3 px-3 ms-lg-5"
           >
             <p className=" fs-2 fw-bolder text-uppercase mt-5">
               Informazioni di contatto
@@ -51,7 +51,7 @@ const ContattiPage = () => {
               Sabato: 9:00 - 13:00
             </p>
           </Col>
-          <Col xs={12} lg={6} className=" pe-3 pe-lg-5 mt-5 mt-lg-0">
+          <Col xs={12} lg={6} className=" px-4 pe-lg-5 mt-5 mt-lg-0">
             <ContattoForm />
           </Col>
         </Row>

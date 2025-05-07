@@ -267,7 +267,6 @@ const ViaggiCatalogoComponent = () => {
           </Col>
         </Row>
 
-        {/* FAQ Section */}
         <Row className="border-top border-danger mt-5 pt-5">
           <Col>
             <FaqComponent />
