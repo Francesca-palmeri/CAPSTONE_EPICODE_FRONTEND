@@ -57,13 +57,15 @@ Questa è un'applicazione full-stack che mette in comunicazione utenti appassion
 - jsPDF
 - Fetch API
 
-### Backend
+### Backend 
 - ASP.NET Core 8.0 (Web API)
 - Entity Framework Core (Code First)
 - ASP.NET Identity + JWT
 - FluentEmail + MailKit
 - SQL Server
 - Serilog + Swagger
+
+Qui rimando al link per il respository https://github.com/Francesca-palmeri/CAPSTONE_EPICODE_BE
 
 ---
 
